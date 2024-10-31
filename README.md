@@ -5,11 +5,10 @@ Simple pomodoro app to aid students (or realy anyone!) to complete their tasks. 
 
 Current features:
 * 25 minute timer (standard pomodoro timer)
+* 5 minute break timer after study timer
 * Can pause and reset timer
 
 TO DO:
-* Add break timer
 * Choose time
 * Change UI
-
 
