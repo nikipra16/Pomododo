@@ -1,8 +1,15 @@
-# React + Vite
+# Pomodoro App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Simple pomodoro app to aid students (or realy anyone!) to complete their tasks. Use this to concentrate for a block of time and take a short break after. Repeat this to study without exhausting yourself.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Current features:
+25 minute timer (standard pomodoro timer)
+Can pause and reset timer
+
+TO DO:
+Add break timer
+Choose time
+Change UI
+
+
