@@ -8,9 +8,6 @@ Current features:
 * 5 minute break timer after study timer
 * Can pause and reset timer
 
-TO DO:
-* Choose time
-* Change UI
 
 
 
