@@ -8,6 +8,10 @@ Current features:
 * 5 minute break timer after study timer
 * Can pause and reset timer
 
+# Setup Guide
+1. npm install
+2. npm run dev
+
 
 
 
