@@ -60,10 +60,10 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+/*button:focus,*/
+/*button:focus-visible {*/
+/*  outline: 4px auto -webkit-focus-ring-color;*/
+/*}*/
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -76,4 +76,13 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+ label {
+     font-size: 20px;
+     font-family: "Arial Black";
+     line-height: 1.1;
+ }
+
+.textField {
+    margin-bottom: 20px;
 }
