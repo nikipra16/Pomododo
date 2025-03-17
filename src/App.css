@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+/*h2 {*/
+/*    font-size: 50px;*/
+/*}*/
+.pomodoro {
+    font-size: 24px;
+   margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.Timer {
+    font-size:50px;
+}

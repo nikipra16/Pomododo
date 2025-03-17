@@ -3,7 +3,9 @@ import './App.css';
 import './index.css';
 import { Button } from '@mui/material';
 import { TextField } from '@mui/material';
-
+import IconButton from '@mui/material/IconButton';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 function App() {
     const [workMinutes, setWorkMinutes] = useState(50);
     const [breakMinutes, setBreakMinutes] = useState(10);
@@ -68,7 +70,10 @@ function App() {
 
     return (
         <div className="container">
-            <h1>POMODORO TIMER</h1>
+            <div className={'pomodoro'}>POMODORO</div>
+            <div className={'Timer'}>
+                <h2>{`${minutes}:${String(seconds).padStart(2, '0')}`}</h2> {/* Display timer */}
+            </div>
             <div>
                 <TextField
                     label="Work Time (min)"
@@ -107,27 +112,16 @@ function App() {
                 />
             </div>
             <div>
-                <h2>{`${minutes}:${String(seconds).padStart(2, '0')}`}</h2> {/* Display timer */}
-                <Button
-                    onClick={handleStart}
-                    disabled={isActive}
-                    variant="contained"
-                    color="primary"
-                >
-                    Start
-                </Button>
-                <Button
-                    onClick={handlePause}
-                    disabled={!isActive}
-                    variant="contained"
-                    color="secondary"
-                >
-                    Pause
-                </Button>
+                <IconButton onClick={handleStart} disabled={isActive}>
+                    <PlayArrowIcon/>
+                </IconButton>
+                <IconButton onClick={handlePause} disabled={!isActive}>
+                    <PauseIcon/>
+                </IconButton>
                 <Button
                     onClick={handleReset}
                     variant="outlined"
-                    color="default"
+                    color="secondary"
                 >
                     Reset
                 </Button>
