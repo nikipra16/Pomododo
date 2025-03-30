@@ -1,53 +1,46 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import './index.css';
-import { Button } from '@mui/material';
-import { TextField } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
+import { Button, TextField, IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+
 function App() {
     const [workMinutes, setWorkMinutes] = useState(50);
     const [breakMinutes, setBreakMinutes] = useState(10);
-    const [minutes, setMinutes] = useState(workMinutes);
-    const [seconds, setSeconds] = useState(0);
+    const [timeLeft, setTimeLeft] = useState(workMinutes * 60);
     const [isActive, setIsActive] = useState(false);
     const [isBreak, setIsBreak] = useState(false);
     const [hasStarted, setHasStarted] = useState(false);
-
 
     useEffect(() => {
         let interval = null;
 
         if (isActive) {
             interval = setInterval(() => {
-                if (minutes === 0 && seconds === 0) {
-                    if (!isBreak) {
-                        setMinutes(breakMinutes);
-                        setIsBreak(true);
-                    } else {
-                        setMinutes(workMinutes);
-                        setIsBreak(false);
+                setTimeLeft((curr) => {
+                    if (curr === 0) {
+                        if (!isBreak) {
+                            setIsBreak(true);
+                            return breakMinutes * 60;
+                        } else {
+                            setIsBreak(false);
+                            return workMinutes * 60;
+                        }
                     }
-                    setSeconds(0);
-                } else if (seconds === 0) {
-                    setMinutes((curr) => curr - 1);
-                    setSeconds(59);
-                } else {
-                    setSeconds((curr) => curr - 1);
-                }
+                    return curr - 1;
+                });
             }, 1000);
         } else {
             clearInterval(interval);
         }
 
         return () => clearInterval(interval);
-    }, [isActive, seconds, minutes, isBreak, workMinutes, breakMinutes]);
-
+    }, [isActive, isBreak, breakMinutes, workMinutes]);
 
     useEffect(() => {
         if (!isActive && !hasStarted) {
-            setMinutes(workMinutes);
+            setTimeLeft(workMinutes * 60);
         }
     }, [workMinutes, breakMinutes, isActive, hasStarted]);
 
@@ -64,15 +57,14 @@ function App() {
         setIsActive(false);
         setIsBreak(false);
         setHasStarted(false);
-        setMinutes(workMinutes);
-        setSeconds(0);
+        setTimeLeft(workMinutes * 60);
     };
 
     return (
         <div className="container">
-            <div className={'pomodoro'}>POMODORO</div>
-            <div className={'Timer'}>
-                <h2>{`${minutes}:${String(seconds).padStart(2, '0')}`}</h2> {/* Display timer */}
+            {/*<div className="pomodoro">POMODORO</div>*/}
+            <div className="Timer">
+                <h2>{`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}</h2>
             </div>
             <div>
                 <TextField
@@ -85,10 +77,7 @@ function App() {
                     size="small"
                     className="textField"
                     InputLabelProps={{
-                        style: {
-                            fontSize: '20px',
-                            color: '#1976d2',
-                        }
+                        style: { fontSize: '20px', color: '#1976d2' }
                     }}
                 />
             </div>
@@ -103,26 +92,18 @@ function App() {
                     size="small"
                     className="textField"
                     InputLabelProps={{
-                        style: {
-                            fontSize: '20px',
-                            color: '#1976d2',
-                        }
+                        style: { fontSize: '20px', color: '#1976d2' }
                     }}
-
                 />
             </div>
             <div>
                 <IconButton onClick={handleStart} disabled={isActive}>
-                    <PlayArrowIcon/>
+                    <PlayArrowIcon />
                 </IconButton>
                 <IconButton onClick={handlePause} disabled={!isActive}>
-                    <PauseIcon/>
+                    <PauseIcon />
                 </IconButton>
-                <Button
-                    onClick={handleReset}
-                    variant="outlined"
-                    color="secondary"
-                >
+                <Button onClick={handleReset} variant="outlined" color="secondary">
                     Reset
                 </Button>
             </div>
