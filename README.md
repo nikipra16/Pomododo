@@ -11,7 +11,7 @@ A simple Pomodoro timer to help students (or anyone!) focus on tasks by using th
 ## Tech Stack
 
 - **Frontend**: React.js (Vite template for fast bundling)
-- **Styling**: Tailwind CSS
+- **Styling**: CSS
 - **Database**: Firebase Firestore (future feature for session tracking)
 - **Authentication**: Firebase Authentication (coming soon for tracking user sessions)
 - **Hosting**: Firebase Hosting (coming soon)
