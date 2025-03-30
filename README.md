@@ -28,7 +28,7 @@ Make sure you have the following installed:
 ### Installation Steps
 
 1. **Clone the repository:**
-2. cd pomodoro-app
+2. cd Pomodoro
 3. npm install
 4. npm run dev
    
