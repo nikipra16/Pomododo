@@ -14,19 +14,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
-    text-align: center;
-    background-color:mintcream;
-    border-radius: 15px;
-    justify-content: center;
-    padding-top: 30px;
-    padding-bottom: 60px;
-    padding-left: 60px;
-    padding-right: 60px;
-    margin: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 200px;
-}
+/*.Timer-container {*/
+/*    text-align: center;*/
+/*    background-color:mintcream;*/
+/*    border-radius: 15px;*/
+/*    justify-content: center;*/
+/*    padding-top: 30px;*/
+/*    padding-bottom: 60px;*/
+/*    padding-left: 60px;*/
+/*    padding-right: 60px;*/
+/*    margin: 0;*/
+/*    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/
+/*    width: 200px;*/
+/*}*/
 
 a {
   font-weight: 500;
@@ -39,10 +39,11 @@ a:hover {
 
 body {
   margin: 0;
+    padding: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  /*min-width: 320px;*/
+  /*min-height: 100vh;*/
     background-color:#f48972  ;
 }
 
@@ -66,23 +67,4 @@ button:hover {
   button {
     background-color: #f9f9f9;
   }
-}
- label {
-     font-size: 20px;
-     font-family: "Arial Black";
-     line-height: 1.1;
- }
-
-.textField {
-    margin-bottom: 20px;
-}
-.pomodoro {
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-align: center;
-}
-.Timer {
-    font-size:50px;
-    margin-top: 0;
 }

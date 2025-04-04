@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField, IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+import Header from './components/header/Header.jsx';
+
 
 function App() {
-    const [workMinutes, setWorkMinutes] = useState(50);
-    const [breakMinutes, setBreakMinutes] = useState(10);
+    const [workMinutes, setWorkMinutes] = useState(25);
+    const [breakMinutes, setBreakMinutes] = useState(5);
     const [timeLeft, setTimeLeft] = useState(workMinutes * 60);
     const [isActive, setIsActive] = useState(false);
     const [isBreak, setIsBreak] = useState(false);
@@ -61,8 +64,9 @@ function App() {
     };
 
     return (
-        <div className="container">
-            {/*<div className="pomodoro">POMODORO</div>*/}
+        <div className={'mainContainer'}>
+            <Header />
+        <div className="Timer-container">
             <div className="Timer">
                 <h2>{`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}</h2>
             </div>
@@ -77,7 +81,7 @@ function App() {
                     size="small"
                     className="textField"
                     InputLabelProps={{
-                        style: { fontSize: '20px', color: '#1976d2' }
+                        style: {fontSize: '20px', color: '#1976d2'}
                     }}
                 />
             </div>
@@ -92,21 +96,22 @@ function App() {
                     size="small"
                     className="textField"
                     InputLabelProps={{
-                        style: { fontSize: '20px', color: '#1976d2' }
+                        style: {fontSize: '20px', color: '#1976d2'}
                     }}
                 />
             </div>
             <div>
                 <IconButton onClick={handleStart} disabled={isActive}>
-                    <PlayArrowIcon />
+                    <PlayArrowIcon/>
                 </IconButton>
                 <IconButton onClick={handlePause} disabled={!isActive}>
-                    <PauseIcon />
+                    <PauseIcon/>
                 </IconButton>
                 <Button onClick={handleReset} variant="outlined" color="secondary">
                     Reset
                 </Button>
             </div>
+        </div>
         </div>
     );
 }

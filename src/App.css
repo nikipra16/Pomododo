@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    width: 100%;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -33,10 +41,49 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
 .read-the-docs {
   color: #888;
 }
+label {
+    font-size: 20px;
+    font-family: "Arial Black";
+    line-height: 1.1;
+}
+
+.textField {
+    margin-bottom: 20px;
+}
+
+.Timer {
+    margin: 10px;
+}
+
+.Timer h2 {
+    font-size:70px;
+}
+.Timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: mintcream;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 400px;
+    height: 300px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+/*.mainContainer {*/
+/*   margin-bottom: 100px;*/
+/*    margin-top: 0px;*/
+/*    align-content: center;*/
+/*}*/
