@@ -2,11 +2,33 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, TextField, IconButton } from '@mui/material';
+import { Button, TextField, IconButton, ThemeProvider} from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import Header from './components/header/Header.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Slider, Box, Typography } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+        leaf: {
+            main: '#3f9e34',
+            disabled: '#A0D091', // Example of a different color for disabled state
+        },
+    },
+    components: {
+        MuiSvgIcon: {
+            styleOverrides: {
+                root: {
+                    color: '#3f9e34', // Default color for icons
+                },
+            },
+        },
+    },
+});
+
+
 
 
 function App() {
@@ -49,6 +71,9 @@ function App() {
     }, [workMinutes, breakMinutes, isActive, hasStarted]);
 
     const handleStart = () => {
+        if (!hasStarted) {
+            setTimeLeft(isBreak ? breakMinutes * 60 : workMinutes * 60);
+        }
         setIsActive(true);
         setHasStarted(true);
     };
@@ -71,69 +96,70 @@ function App() {
             <Header />
         <div className="Timer-container">
             <div className="Timer">
-                <h2 id={"timeLeft"}>{`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}</h2>
+                <Typography id={"timeLeft"} sx={{ color: 'whitesmoke', fontSize: '80px', mb: 1 }}>
+                    {`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}
+                </Typography>
+                {/*<Typography id={"breakTimeLeft"} sx={{ color: 'whitesmoke', fontSize: '20px', mb: 1 }}>*/}
+                {/*    {`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}*/}
+                {/*</Typography>*/}
             </div>
             <div className="textbox">
-                <TextField
-                    label="Work Time (min)"
-                    type="number"
+                <Typography sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1 }}>
+                    Work Time
+                </Typography>
+                <Slider
                     value={workMinutes}
-                    onChange={(e) => {
-                        const value = parseInt(e.target.value) || 0;
-                        if (value >= 0 && value <= 59) {
-                            setWorkMinutes(value);
+                    onChange={(e, newValue) => {
+                        setWorkMinutes(newValue);
+                        if (!isActive && !isBreak) {
+                            setTimeLeft(newValue * 60);
                         }
                     }}
+                    min={1}
+                    max={59}
+                    step={1}
                     disabled={isActive}
-                    variant="outlined"
-                    size="small"
-                    className="textField"
-                    InputLabelProps={{
-                        style: {
-                            fontSize: '25px',
-                            color: 'whitesmoke',
-                            transform: 'translate(14px, -22px) scale(0.75)',
-                        },
-                        shrink: true,
-                    }}
+                    valueLabelDisplay="auto"
+                    sx={{ color: '#3f9e34' }}
                 />
             </div>
             <div>
-                <TextField
-                    label="Break Time (min)"
-                    type="number"
+                <Typography sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1 }}>
+                    Break Time
+                </Typography>
+                <Slider
                     value={breakMinutes}
-                    onChange={(e) => {
-                        const value = parseInt(e.target.value) || 0;
-                        if (value >= 0 && value <= 59) {
-                            setBreakMinutes(value);
+                    onChange={(e, newValue) => {
+                        setBreakMinutes(newValue);
+                        if (!isActive && isBreak) {
+                            setTimeLeft(newValue * 60);
                         }
                     }}
+                    min={1}
+                    max={15}
+                    step={1}
                     disabled={isActive}
-                    variant="outlined"
-                    size="small"
-                    className="textField"
-                    InputLabelProps={{
-                        style: {
-                            fontSize: '25px',
-                            color: 'whitesmoke',
-                            transform: 'translate(14px, -22px) scale(0.75)',
-                        },
-                        shrink: true,
-                    }}
+                    valueLabelDisplay="auto"
+                    sx={{ color: '#3f9e34' }}
                 />
             </div>
-            <div>
-                <IconButton onClick={handleStart} disabled={isActive}>
-                    <PlayArrowIcon/>
-                </IconButton>
-                <IconButton onClick={handlePause} disabled={!isActive}>
-                    <PauseIcon/>
-                </IconButton>
-                <Button onClick={handleReset} variant="outlined" color="secondary">
-                    Reset
-                </Button>
-            </div>
+            <ThemeProvider theme={theme}>
+                <div>
+                    <IconButton onClick={handleStart} disabled={isActive} >
+                        <PlayArrowIcon sx={{
+                            color: isActive ? theme.palette.leaf.disabled : theme.palette.leaf.main,
+                        }}/>
+                    </IconButton >
+                    <IconButton onClick={handlePause} disabled={!isActive}>
+                        <PauseIcon sx={{
+                            color: isActive ? theme.palette.leaf.main : theme.palette.leaf.disabled,
+                        }} />
+                    </IconButton>
+                    <Button onClick={handleReset} variant="outlined" color="leaf" >
+                        Reset
+                    </Button>
+                </div>
+            </ThemeProvider>
         </div>
         </div>
     );

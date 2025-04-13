@@ -25,8 +25,8 @@ label {
 
 .textField {
     margin-bottom: 29px;
-    /*background-color: #fff3eb ;*/
-    border-radius: 7px;
+    background-color: #fff3eb ;
+    border-radius: 4px;
 }
 
 .Timer {
@@ -43,11 +43,11 @@ label {
     justify-content: center;
     text-align: center;
     background-color: #c24f4f;
-    border-radius: 200px;
+    border-radius: 190px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    width: 400px;
-    height: 350px;
+    width: 430px;
+    height: 400px;
     margin: auto;
     position: absolute;
     top: 50%;
