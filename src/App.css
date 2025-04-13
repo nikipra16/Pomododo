@@ -58,3 +58,12 @@ label {
 .timeLeft {
     color: white;
 }
+
+.slidersWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
