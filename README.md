@@ -31,6 +31,9 @@ Make sure you have the following installed:
 2. cd Pomodoro
 3. npm install
 4. npm run dev
+
+### Deployment
+https://nikipra16.github.io/Pomodoro/
    
 ## License
 
