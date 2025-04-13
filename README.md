@@ -12,9 +12,7 @@ A simple Pomodoro timer to help students (or anyone!) focus on tasks by using th
 
 - **Frontend**: React.js
 - **Styling**: CSS
-- **Database**: Firebase Firestore (future feature for session tracking)
 - **Authentication**: Firebase Authentication (coming soon for tracking user sessions)
-- **Hosting**: Firebase Hosting (coming soon)
 
 ## Setup Guide
 
