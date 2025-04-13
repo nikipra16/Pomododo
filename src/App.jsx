@@ -6,6 +6,7 @@ import { Button, TextField, IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import Header from './components/header/Header.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -60,7 +61,9 @@ function App() {
         setIsActive(false);
         setIsBreak(false);
         setHasStarted(false);
-        setTimeLeft(workMinutes * 60);
+        // setTimeLeft(25 * 60);
+        setWorkMinutes(25);
+        setBreakMinutes(5);
     };
 
     return (
@@ -68,20 +71,30 @@ function App() {
             <Header />
         <div className="Timer-container">
             <div className="Timer">
-                <h2>{`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}</h2>
+                <h2 id={"timeLeft"}>{`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}</h2>
             </div>
-            <div>
+            <div className="textbox">
                 <TextField
                     label="Work Time (min)"
                     type="number"
                     value={workMinutes}
-                    onChange={(e) => setWorkMinutes(parseInt(e.target.value) || 0)}
+                    onChange={(e) => {
+                        const value = parseInt(e.target.value) || 0;
+                        if (value >= 0 && value <= 59) {
+                            setWorkMinutes(value);
+                        }
+                    }}
                     disabled={isActive}
                     variant="outlined"
                     size="small"
                     className="textField"
                     InputLabelProps={{
-                        style: {fontSize: '20px', color: '#1976d2'}
+                        style: {
+                            fontSize: '25px',
+                            color: 'whitesmoke',
+                            transform: 'translate(14px, -22px) scale(0.75)',
+                        },
+                        shrink: true,
                     }}
                 />
             </div>
@@ -90,13 +103,23 @@ function App() {
                     label="Break Time (min)"
                     type="number"
                     value={breakMinutes}
-                    onChange={(e) => setBreakMinutes(parseInt(e.target.value) || 0)}
+                    onChange={(e) => {
+                        const value = parseInt(e.target.value) || 0;
+                        if (value >= 0 && value <= 59) {
+                            setBreakMinutes(value);
+                        }
+                    }}
                     disabled={isActive}
                     variant="outlined"
                     size="small"
                     className="textField"
                     InputLabelProps={{
-                        style: {fontSize: '20px', color: '#1976d2'}
+                        style: {
+                            fontSize: '25px',
+                            color: 'whitesmoke',
+                            transform: 'translate(14px, -22px) scale(0.75)',
+                        },
+                        shrink: true,
                     }}
                 />
             </div>

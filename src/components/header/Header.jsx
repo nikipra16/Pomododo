@@ -4,11 +4,15 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function Header () {
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary" fixed="top" >
-            <Container className="nav">
+        <Navbar expand="lg"  fixed="top" data-bs-theme="dark" style={{
+            backgroundColor: '#c24f4f',
+        }}>
+            <Container className="nav" >
                 <Navbar.Brand href="#home" className="custom-navbar-brand">POMODORO</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -20,16 +24,16 @@ function Header () {
                             <NavDropdown.Item href="#analytics">
                                 Analytics
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
+                            {/*<NavDropdown.Divider />*/}
+                            {/*<NavDropdown.Item href="#action/3.4">*/}
+                            {/*    Separated link*/}
+                            {/*</NavDropdown.Item>*/}
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+
     )
 }
 
