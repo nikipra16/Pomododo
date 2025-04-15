@@ -73,7 +73,7 @@ label {
 /* For small screens (phones) */
 @media (max-width: 600px) {
     .Timer-container {
-        width: auto;
+        width: 50%;
         height: auto;
         padding: 20px;
     }
@@ -100,7 +100,7 @@ label {
 /* tablets */
 @media (max-width: 900px) {
     .Timer-container {
-        width: 430px;
+        width: 70%;
         height: auto;
         padding: 30px;
     }
