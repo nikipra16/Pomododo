@@ -47,6 +47,14 @@ function App() {
     const sessionDur = () => (isBreak ? breakMinutes : workMinutes) * 60 * 1000;
 
     useEffect(() => {
+        localStorage.setItem('workMinutes', workMinutes);
+        localStorage.setItem('breakMinutes', breakMinutes);
+        localStorage.setItem('duration', duration);
+        localStorage.setItem('isActive', isActive.toString());
+        localStorage.setItem('isBreak', isBreak.toString());
+    }, [workMinutes, breakMinutes, duration, isActive, isBreak]);
+
+    useEffect(() => {
         if (isActive) {
             startTime.current = Date.now() - elapsedRef.current;
 
@@ -83,7 +91,7 @@ function App() {
         if (!hasStarted) {
             setDuration(workMinutes * 60);
         }
-    }, [workMinutes, hasStarted]);
+    }, [workMinutes, hasStarted,breakMinutes]);
 
     const handleStart = () => {
         if (!hasStarted) {
