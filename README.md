@@ -12,9 +12,7 @@ A simple Pomodoro timer to help students (or anyone!) focus on tasks by using th
 
 - **Frontend**: React.js
 - **Styling**: CSS
-- **Database**: Firebase Firestore (future feature for session tracking)
 - **Authentication**: Firebase Authentication (coming soon for tracking user sessions)
-- **Hosting**: Firebase Hosting (coming soon)
 
 ## Setup Guide
 
@@ -31,6 +29,9 @@ Make sure you have the following installed:
 2. cd Pomodoro
 3. npm install
 4. npm run dev
+
+### Deployment
+https://nikipra16.github.io/Pomodoro/
    
 ## License
 
