@@ -52,7 +52,7 @@ function App() {
         localStorage.setItem('duration', duration);
         localStorage.setItem('isActive', isActive.toString());
         localStorage.setItem('isBreak', isBreak.toString());
-    }, [workMinutes, breakMinutes, duration, isActive, isBreak]);
+    }, [workMinutes, breakMinutes, duration, isActive, isBreak, hasStarted]);
 
     useEffect(() => {
         if (isActive) {
