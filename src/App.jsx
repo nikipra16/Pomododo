@@ -123,6 +123,9 @@ function App() {
         <div className={'mainContainer'}>
             <Header />
             <div className="Timer-container">
+                <Typography sx={{ color: 'whitesmoke', fontSize: '30px', mb: 0 }}>
+                    {isBreak ? 'Break Time 🤗🥳' : 'Work Time 📚🧑‍💻'}
+                </Typography>
                 <div className="Timer">
                     <Typography id="timeLeft" sx={{ color: 'whitesmoke', fontSize: '80px', mb: 1 }}>
                         {`${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, '0')}`}
