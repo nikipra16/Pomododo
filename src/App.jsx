@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef,} from 'react';
 import './App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,30 +8,10 @@ import PauseIcon from '@mui/icons-material/Pause';
 import Header from './components/header/Header.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Slider, Typography } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
 import { LinearProgress } from '@mui/material';
-
-
-const theme = createTheme({
-    palette: {
-        leaf: {
-            main: '#3f9e34',
-            disabled: '#A0D091',
-        },
-    },
-    components: {
-        MuiSvgIcon: {
-            styleOverrides: {
-                root: {
-                    color: '#3f9e34',
-                },
-            },
-        },
-    },
-});
-
-
-
+import ToDo from './components/todo/todo.jsx';
+import theme from './components/theme.jsx';
+import { AppProvider, useAppContext } from './components/AppContext.jsx';
 
 function App() {
     const [workMinutes, setWorkMinutes] = useState(25);
@@ -39,15 +19,17 @@ function App() {
     const [duration, setDuration] = useState(workMinutes * 60);
     const [isActive, setIsActive] = useState(false);
     const [isBreak, setIsBreak] = useState(false);
-    const [hasStarted, setHasStarted] = useState(false);
+    const { hasStarted, setHasStarted } = useAppContext();
 
     const intervalRef = useRef(null);
     const startTime = useRef(0);
     const elapsedRef = useRef(0);
     const sessionDur = () => (isBreak ? breakMinutes : workMinutes) * 60 * 1000;
 
+
     useEffect(() => {
         localStorage.setItem('workMinutes', workMinutes);
+        localStorage.setItem('hasStarted', hasStarted);
         localStorage.setItem('breakMinutes', breakMinutes);
         localStorage.setItem('duration', duration);
         localStorage.setItem('isActive', isActive.toString());
@@ -120,95 +102,101 @@ function App() {
     const progress = (duration / (isBreak ? breakMinutes * 60 : workMinutes * 60)) * 100;
 
     return (
-        <div className={'mainContainer'}>
+        <div className="mainWrapper">
+        <div className={'mainContainer'} >
             <Header />
-            <div className="Timer-container">
-                <Typography sx={{ color: 'whitesmoke', fontSize: '30px', mb: 0 }}>
-                    {isBreak ? 'Break Time 🤗🥳' : 'Work Time 📚🧑‍💻'}
-                </Typography>
-                <div className="Timer">
-                    <Typography id="timeLeft" sx={{ color: 'whitesmoke', fontSize: '80px', mb: 1 }}>
-                        {`${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, '0')}`}
+            <div className="contentWrapper">
+                <div className="Timer-container">
+                    <Typography sx={{ color: 'whitesmoke', fontSize: '30px', mb: 0 }}>
+                        {isBreak ? 'Break Time 🤗🥳' : 'Work Time 📚🧑‍💻'}
                     </Typography>
-                    <LinearProgress
-                        variant="determinate"
-                        value={progress}
-                        sx={{
-                            width: '100%',
-                            height: 10,
-                            backgroundColor: '#f3f3f3',
-                            '& .MuiLinearProgress-bar': {
-                                backgroundColor: isBreak ? '#4CAF50' : '#3f9e34',
-                            },
-                        }}
-                    />
-                </div>
-                <div className="slidersWrapper">
-                    <div className="sliderItem">
-                        <Typography sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1 }}>
-                            Work Time
+                    <div className="Timer">
+                        <Typography id="timeLeft" sx={{ color: 'whitesmoke', fontSize: '80px', mb: 1 }}>
+                            {`${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, '0')}`}
                         </Typography>
-                        <Slider
-                            value={workMinutes}
-                            onChange={(e, newValue) => {
-                                setWorkMinutes(newValue);
-                                if (!hasStarted && !isBreak) {
-                                    setDuration(newValue * 60);
-                                }
+                        <LinearProgress
+                            variant="determinate"
+                            value={progress}
+                            sx={{
+                                width: '100%',
+                                height: 10,
+                                backgroundColor: '#f3f3f3',
+                                '& .MuiLinearProgress-bar': {
+                                    backgroundColor: isBreak ? '#4CAF50' : '#3f9e34',
+                                },
                             }}
-                            min={1}
-                            max={59}
-                            step={1}
-                            disabled={hasStarted}
-                            valueLabelDisplay="auto"
-                            sx={{ color: '#3f9e34' }}
                         />
                     </div>
-                    <div className="sliderItem">
-                        <Typography sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1 }}>
-                            Break Time
-                        </Typography>
-                        <Slider
-                            value={breakMinutes}
-                            onChange={(e, newValue) => {
-                                setBreakMinutes(newValue);
-                                if (!hasStarted && isBreak) {
-                                    setDuration(newValue * 60);
-                                }
-                            }}
-                            min={1}
-                            max={15}
-                            step={1}
-                            disabled={hasStarted}
-                            valueLabelDisplay="auto"
-                            sx={{ color: '#3f9e34' }}
-                        />
+                    <div className="slidersWrapper">
+                        <div className="sliderItem">
+                            <Typography sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1 }}>
+                                Work Time
+                            </Typography>
+                            <Slider
+                                value={workMinutes}
+                                onChange={(e, newValue) => {
+                                    setWorkMinutes(newValue);
+                                    if (!hasStarted && !isBreak) {
+                                        setDuration(newValue * 60);
+                                    }
+                                }}
+                                min={1}
+                                max={59}
+                                step={1}
+                                disabled={hasStarted}
+                                valueLabelDisplay="auto"
+                                sx={{ color: '#3f9e34' }}
+                            />
+                        </div>
+                        <div className="sliderItem">
+                            <Typography sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1 }}>
+                                Break Time
+                            </Typography>
+                            <Slider
+                                value={breakMinutes}
+                                onChange={(e, newValue) => {
+                                    setBreakMinutes(newValue);
+                                    if (!hasStarted && isBreak) {
+                                        setDuration(newValue * 60);
+                                    }
+                                }}
+                                min={1}
+                                max={15}
+                                step={1}
+                                disabled={hasStarted}
+                                valueLabelDisplay="auto"
+                                sx={{ color: '#3f9e34' }}
+                            />
+                        </div>
                     </div>
+                    <ThemeProvider theme={theme}>
+                        <div>
+                            <IconButton onClick={handleStart} disabled={isActive}>
+                                <PlayArrowIcon sx={{ color: isActive ? theme.palette.leaf.disabled : theme.palette.leaf.main }} />
+                            </IconButton>
+                            <IconButton onClick={handlePause} disabled={!isActive}>
+                                <PauseIcon sx={{ color: isActive ? theme.palette.leaf.main : theme.palette.leaf.disabled }} />
+                            </IconButton>
+                            <Button onClick={handleReset} variant="contained" color="leaf">
+                                <div style={{ color: 'whitesmoke' }}>Reset</div>
+                            </Button>
+                        </div>
+                    </ThemeProvider>
                 </div>
-                <ThemeProvider theme={theme}>
-                    <div>
-                        <IconButton onClick={handleStart} disabled={isActive}>
-                            <PlayArrowIcon
-                                sx={{
-                                    color: isActive ? theme.palette.leaf.disabled : theme.palette.leaf.main,
-                                }}
-                            />
-                        </IconButton>
-                        <IconButton onClick={handlePause} disabled={!isActive}>
-                            <PauseIcon
-                                sx={{
-                                    color: isActive ? theme.palette.leaf.main : theme.palette.leaf.disabled,
-                                }}
-                            />
-                        </IconButton>
-                        <Button onClick={handleReset} variant="contained" color="leaf">
-                            <div style={{ color: 'whitesmoke' }}>Reset</div>
-                        </Button>
-                    </div>
-                </ThemeProvider>
+
+                <div className="ToDo-container">
+                    <ToDo />
+                </div>
             </div>
         </div>
+            </div>
     );
 }
 
-export default App;
+export default function AppWrapper() {
+    return (
+        <AppProvider>
+            <App />
+        </AppProvider>
+    );
+}

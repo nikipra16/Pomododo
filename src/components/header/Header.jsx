@@ -13,7 +13,7 @@ function Header () {
             backgroundColor: '#c24f4f',
         }}>
             <Container className="nav" >
-                <Navbar.Brand href="#home" className="custom-navbar-brand">POMODORO</Navbar.Brand>
+                <Navbar.Brand href="#home" className="custom-navbar-brand">POMODODO</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -24,10 +24,6 @@ function Header () {
                             <NavDropdown.Item href="#analytics">
                                 Analytics
                             </NavDropdown.Item>
-                            {/*<NavDropdown.Divider />*/}
-                            {/*<NavDropdown.Item href="#action/3.4">*/}
-                            {/*    Separated link*/}
-                            {/*</NavDropdown.Item>*/}
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

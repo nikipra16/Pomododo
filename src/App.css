@@ -1,8 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
 }
 
 html, body, #root {
@@ -15,7 +15,7 @@ html,body {
 }
 
 .read-the-docs {
-  color: #888;
+    color: #888;
 }
 label {
     font-size: 25px;
@@ -36,6 +36,24 @@ label {
 .Timer h2 {
     font-size:70px;
 }
+
+.contentWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+    /*gap: 10px;*/
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    /*border: 2px solid black;*/
+}
 .Timer-container {
     display: flex;
     flex-direction: column;
@@ -48,11 +66,20 @@ label {
     padding: 40px;
     width: 430px;
     height: 400px;
-    margin: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 30px;
+    /*position: absolute;*/
+    /*top: auto;*/
+    /*left: auto;*/
+    /*transform: translate(-50%, -50%);*/
+    /*border: 2px solid black;*/
+}
+
+.ToDo-container {
+    background-color: #fff3eb;
+    border-radius: 16px;
+    padding: 20px;
+    width: 350px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .timeLeft {
@@ -76,6 +103,7 @@ label {
         width: 50%;
         height: auto;
         padding: 20px;
+        flex-direction: column;
     }
 
     .Timer h2 {
