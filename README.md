@@ -7,6 +7,7 @@ A simple Pomodoro timer to help students (or anyone!) focus on tasks by using th
 - **Customizable Work Time**: Users can set the duration of the work session.
 - **Customizable Break Time**: Users can set the break duration.
 - **Timer Control**: Users can start, pause, and reset the timer.
+- **To Do list**: Users can add tasks for a session.
   
 ## Tech Stack
 
