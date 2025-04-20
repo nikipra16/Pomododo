@@ -32,7 +32,7 @@ Make sure you have the following installed:
 4. npm run dev
 
 ### Deployment
-https://nikipra16.github.io/Pomodoro/
+https://nikipra16.github.io/Pomododo/
    
 ## License
 
