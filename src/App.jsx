@@ -12,6 +12,9 @@ import { LinearProgress } from '@mui/material';
 import ToDo from './components/todo/todo.jsx';
 import theme from './components/theme.jsx';
 import { AppProvider, useAppContext } from './components/AppContext.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignUp from "./components/signUp/signUp.jsx";
+import LogIn from './components/login/login.jsx';
 
 function App() {
     const [workMinutes, setWorkMinutes] = useState(25);
@@ -36,6 +39,9 @@ function App() {
         localStorage.setItem('isBreak', isBreak.toString());
     }, [workMinutes, breakMinutes, duration, isActive, isBreak, hasStarted]);
 
+    const workOver = new Audio('/Pomododo/sounds/workOver.wav')
+    const breakOver = new Audio('/Pomododo/sounds/breakOver.wav')
+
     useEffect(() => {
         if (isActive) {
             startTime.current = Date.now() - elapsedRef.current;
@@ -52,11 +58,13 @@ function App() {
                     elapsedRef.current = 0;
 
                     if (!isBreak) {
+                        workOver.play();
                         setIsBreak(true);
                         setDuration(breakMinutes * 60);
                         setIsActive(true);
                         startTime.current = Date.now();
                     } else {
+                        breakOver.play();
                         setIsBreak(false);
                         setIsActive(false);
                         setHasStarted(false);
@@ -196,7 +204,13 @@ function App() {
 export default function AppWrapper() {
     return (
         <AppProvider>
-            <App />
+            <Router basename="/Pomododo">
+                <Routes>
+                    <Route path="/" element={<App />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/login" element={<LogIn />} />
+                </Routes>
+            </Router>
         </AppProvider>
     );
 }

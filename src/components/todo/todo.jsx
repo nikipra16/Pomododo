@@ -16,7 +16,7 @@ import { useAppContext } from '/src/components/AppContext.jsx';
 
 
 function ToDo() {
-    const { hasStarted } = useAppContext();  // Get context value
+    const { hasStarted } = useAppContext();
     const [tasks, setTasks] = useState([]);
     const [text, setText] = useState('');
 
