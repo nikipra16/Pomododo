@@ -19,15 +19,15 @@ function Header () {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
-                        {/*<Nav.Link as={Link} to="/login">Log In</Nav.Link>*/}
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
-                            <NavDropdown.Item href="#analytics">
-                                Analytics
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+                        {/*<NavDropdown title="User" id="basic-nav-dropdown">*/}
+                        {/*    <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>*/}
+                        {/*    <NavDropdown.Item href="#analytics">*/}
+                        {/*        Analytics*/}
+                        {/*    </NavDropdown.Item>*/}
+                        {/*</NavDropdown>*/}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

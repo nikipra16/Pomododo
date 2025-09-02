@@ -17,11 +17,12 @@ import { useAppContext } from '/src/components/AppContext.jsx';
 
 function ToDo() {
     const { hasStarted } = useAppContext();
-    const [tasks, setTasks] = useState([]);
+    // switched from array to object, so we can have key value pair. Better for time complexity?
+    const [tasks, setTasks] = useState({});
     const [text, setText] = useState('');
 
     useEffect(() => {
-        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || {};
         setTasks(savedTasks);
     }, []);
 
@@ -32,27 +33,37 @@ function ToDo() {
         }
     }, [hasStarted]);
 
-
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }, [tasks]);
 
+
     const addTask = (text) => {
         if (text.trim() === '') return;
-        const newTasks = [...tasks, { id: tasks.length, task: text, completed: false }];
-        setTasks(newTasks);
+        const id = Date.now();
+        setTasks(prev => ({
+            ...prev,
+            [id]: { id, task: text, completed: false }
+        }));
         setText('');
     };
 
     const handleTask = (id) => {
-        setTasks(tasks.map((task) =>
-            task.id === id ? { ...task, completed: !task.completed } : task
-        ));
+        setTasks(prev => ({
+            ...prev,
+            [id]: {
+                ...prev[id],
+                completed: !prev[id].completed
+            }
+        }));
     };
 
     const deleteTask = (id) => {
-        const newTasks = tasks.filter((task) => task.id !== id);
-        setTasks(newTasks);
+        setTasks(prev => {
+            const newTasks = { ...prev };
+            delete newTasks[id];
+            return newTasks;
+        });
     };
 
     return (
@@ -96,7 +107,7 @@ function ToDo() {
             </Button>
 
             <List>
-                {tasks.map((task) => {
+                {Object.values(tasks).map((task) => {
                     const labelId = `checkbox-list-label-${task.id}`;
                     return (
                         <ListItem key={task.id} secondaryAction={

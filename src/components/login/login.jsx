@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "/src/firebase.js";
@@ -23,7 +22,7 @@ export default function LogIn() {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             alert("LogIn successful!");
-            navigate("/");
+            navigate("/profile");
 
         } catch (error) {
             alert(error.message);

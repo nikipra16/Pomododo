@@ -29,14 +29,6 @@ label {
     border-radius: 4px;
 }
 
-.Timer {
-    margin: 10px;
-}
-
-.Timer h2 {
-    font-size:70px;
-}
-
 .contentWrapper {
     display: flex;
     flex-direction: row;
@@ -54,25 +46,25 @@ label {
     /*transform: translate(-50%, -50%);*/
     /*border: 2px solid black;*/
 }
-.Timer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: #c24f4f;
-    border-radius: 190px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    width: 430px;
-    height: 400px;
-    margin: 30px;
-    /*position: absolute;*/
-    /*top: auto;*/
-    /*left: auto;*/
-    /*transform: translate(-50%, -50%);*/
-    /*border: 2px solid black;*/
-}
+/*.Timer-container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    text-align: center;*/
+/*    background-color: #c24f4f;*/
+/*    border-radius: 190px;*/
+/*    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/
+/*    padding: 40px;*/
+/*    width: 430px;*/
+/*    height: 400px;*/
+/*    margin: 30px;*/
+/*    !*position: absolute;*!*/
+/*    !*top: auto;*!*/
+/*    !*left: auto;*!*/
+/*    !*transform: translate(-50%, -50%);*!*/
+/*    !*border: 2px solid black;*!*/
+/*}*/
 
 .ToDo-container {
     background-color: #fff3eb;
@@ -82,79 +74,79 @@ label {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.timeLeft {
-    color: white;
-}
+/*.timeLeft {*/
+/*    color: white;*/
+/*}*/
 
-.slidersWrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
+/*.slidersWrapper {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*    gap: 30px;*/
+/*    margin-top: 20px;*/
+/*    flex-wrap: wrap;*/
+/*}*/
 
-/* Media Queries for Responsiveness */
+/*!* Media Queries for Responsiveness *!*/
 
-/* For small screens (phones) */
-@media (max-width: 600px) {
-    .Timer-container {
-        width: 50%;
-        height: auto;
-        padding: 20px;
-        flex-direction: column;
-    }
+/*!* For small screens (phones) *!*/
+/*@media (max-width: 600px) {*/
+/*    .Timer-container {*/
+/*        width: 50%;*/
+/*        height: auto;*/
+/*        padding: 20px;*/
+/*        flex-direction: column;*/
+/*    }*/
 
-    .Timer h2 {
-        font-size: 50px;
-    }
+/*    .Timer h2 {*/
+/*        font-size: 50px;*/
+/*    }*/
 
-    .slidersWrapper {
-        flex-direction: column;
-        gap: 15px;
-        margin-top: 15px;
-    }
+/*    .slidersWrapper {*/
+/*        flex-direction: column;*/
+/*        gap: 15px;*/
+/*        margin-top: 15px;*/
+/*    }*/
 
-    label {
-        font-size: 18px;
-    }
+/*    label {*/
+/*        font-size: 18px;*/
+/*    }*/
 
-    .textField {
-        margin-bottom: 20px;
-    }
-}
+/*    .textField {*/
+/*        margin-bottom: 20px;*/
+/*    }*/
+/*}*/
 
-/* tablets */
-@media (max-width: 900px) {
-    .Timer-container {
-        width: 70%;
-        height: auto;
-        padding: 30px;
-    }
+/*!* tablets *!*/
+/*@media (max-width: 900px) {*/
+/*    .Timer-container {*/
+/*        width: 70%;*/
+/*        height: auto;*/
+/*        padding: 30px;*/
+/*    }*/
 
-    .contentWrapper {
-        margin-top:100px;
-    }
+/*    .contentWrapper {*/
+/*        margin-top:100px;*/
+/*    }*/
 
-    .Timer h2 {
-        font-size: 60px;
-    }
+/*    .Timer h2 {*/
+/*        font-size: 60px;*/
+/*    }*/
 
-    .slidersWrapper {
-        gap: 20px;
-    }
-}
+/*    .slidersWrapper {*/
+/*        gap: 20px;*/
+/*    }*/
+/*}*/
 
-/* desktops */
-@media (min-width: 1200px) {
-    .Timer-container {
-        width: 430px;
-        height: 400px;
-        padding: 40px;
-    }
+/*!* desktops *!*/
+/*@media (min-width: 1200px) {*/
+/*    .Timer-container {*/
+/*        width: 430px;*/
+/*        height: 400px;*/
+/*        padding: 40px;*/
+/*    }*/
 
-    .Timer h2 {
-        font-size: 70px;
-    }
-}
+/*    .Timer h2 {*/
+/*        font-size: 70px;*/
+/*    }*/
+/*}*/

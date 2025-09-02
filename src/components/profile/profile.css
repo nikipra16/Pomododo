@@ -1,0 +1,21 @@
+.profile-container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+
+    padding: 1rem;
+    /* keep your existing flex and text-align styles if needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #c24f4f;
+    /*border: 2px solid black;*/
+}
+.chart-wrapper {
+    width: 90%;
+    max-width: 800px;
+    height: 300px;
+    margin-top: 1rem;
+}
