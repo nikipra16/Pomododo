@@ -19,7 +19,20 @@ const io = socketIo(server, {
 // Middleware
 app.use(express.json());
 
-// API routes (before static file serving)
+// Serve static files from the React app build
+const distPath = path.join(__dirname, '../dist');
+console.log('🔍 DEBUG: Looking for dist folder at:', distPath);
+
+// Check if dist folder exists
+const fs = require('fs');
+if (fs.existsSync(distPath)) {
+    console.log('✅ Found dist folder, serving static files');
+    app.use(express.static(distPath));
+} else {
+    console.log('❌ Dist folder not found, serving backend API only');
+}
+
+// API routes (after static file serving)
 app.get('/api/health', (req, res) => {
     res.json({
         status: 'healthy',
@@ -34,23 +47,12 @@ app.get('/api/ping', (req, res) => {
     res.json({ pong: true, timestamp: new Date().toISOString() });
 });
 
-// Serve static files from the React app build
-const distPath = path.join(__dirname, '../dist');
-console.log('🔍 DEBUG: Looking for dist folder at:', distPath);
-
-// Check if dist folder exists
-const fs = require('fs');
+// Catch-all handler: send back React's index.html file for any non-API routes
 if (fs.existsSync(distPath)) {
-    console.log('✅ Found dist folder, serving static files');
-    app.use(express.static(distPath));
-    
-    // Catch-all handler: send back React's index.html file for any non-API routes
     app.get('*', (req, res) => {
         res.sendFile(path.join(distPath, 'index.html'));
     });
 } else {
-    console.log('❌ Dist folder not found, serving backend API only');
-    // Fallback: serve a simple HTML page
     app.get('*', (req, res) => {
         res.send(`
             <html>
