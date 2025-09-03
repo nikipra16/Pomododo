@@ -7,7 +7,7 @@ import './studyRoom.css';
 // Dynamic WebSocket URL for development and production
 const WEBSOCKET_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3001'  // Development
-    : 'https://pomododo-production.up.railway.app';  // Production Railway backend
+    : window.location.origin;  // Production - same domain as frontend!
 
 export default function StudyRoom() {
     const { roomCode } = useParams();
