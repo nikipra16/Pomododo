@@ -395,6 +395,11 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3001;
 
+// Debug port configuration
+console.log('🔍 DEBUG: Environment PORT:', process.env.PORT);
+console.log('🔍 DEBUG: Using PORT:', PORT);
+console.log('🔍 DEBUG: All environment variables:', Object.keys(process.env));
+
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Study Room WebSocket Server running on port ${PORT}`);
     console.log(`📡 WebSocket endpoint: ws://0.0.0.0:${PORT}`);
