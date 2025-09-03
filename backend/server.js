@@ -62,15 +62,27 @@ function generateRoomCode() {
 
 // Basic routes
 app.get('/', (req, res) => {
-    res.json({ message: 'Study Room WebSocket Server is running!' });
+    res.json({ 
+        message: 'Study Room WebSocket Server', 
+        status: 'running',
+        timestamp: new Date().toISOString(),
+        version: '1.0.0'
+    });
 });
 
 app.get('/health', (req, res) => {
     res.json({
         status: 'healthy',
         rooms: rooms.size,
-        timestamp: new Date().toISOString()
+        users: userSockets.size,
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime()
     });
+});
+
+// Simple ping endpoint for Railway health checks
+app.get('/ping', (req, res) => {
+    res.json({ pong: true, timestamp: new Date().toISOString() });
 });
 
 // Socket.io connection handling
