@@ -12,7 +12,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "build:fullstack": "npm run build && cd backend && npm install",
+    "start:fullstack": "cd backend && npm start"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -33,6 +35,7 @@
     "react-scripts": "^5.0.1",
     "reactstrap": "^9.2.3",
     "recharts": "^3.1.0",
+    "socket.io-client": "^4.7.5",
     "styled-components": "^6.1.15"
   },
   "devDependencies": {
