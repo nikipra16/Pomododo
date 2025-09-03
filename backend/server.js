@@ -1,49 +1,69 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
 
-// CORS configuration
+// No CORS needed - same domain for frontend and backend!
 const io = socketIo(server, {
     cors: {
-        origin: [
-            "http://localhost:5173", "http://localhost:5173/Pomododo", 
-            "http://localhost:5174", "http://localhost:5174/Pomododo", 
-            "http://localhost:5175", "http://localhost:5175/Pomododo", 
-            "http://localhost:5176", "http://localhost:5176/Pomododo",
-            "http://localhost:5177", "http://localhost:5177/Pomododo",
-            "http://localhost:5178", "http://localhost:5178/Pomododo",
-            "https://nikitap.github.io", "https://nikitap.github.io/Pomododo",
-            "https://nikipra16.github.io", "https://nikipra16.github.io/Pomododo",
-            "https://pomododo-production.up.railway.app",
-            "null"
-        ],
+        origin: "*", // Allow all origins since we're serving from same domain
         methods: ["GET", "POST"],
         credentials: true
     }
 });
 
 // Middleware
-app.use(cors({
-    origin: [
-        "http://localhost:5173", "http://localhost:5173/Pomododo", 
-        "http://localhost:5174", "http://localhost:5174/Pomododo", 
-        "http://localhost:5175", "http://localhost:5175/Pomododo", 
-        "http://localhost:5176", "http://localhost:5176/Pomododo",
-        "http://localhost:5177", "http://localhost:5177/Pomododo",
-        "http://localhost:5178", "http://localhost:5178/Pomododo",
-        "https://nikitap.github.io", "https://nikitap.github.io/Pomododo",
-        "https://nikipra16.github.io", "https://nikipra16.github.io/Pomododo",
-        "https://pomododo-production.up.railway.app",
-        "null"
-    ],
-    credentials: true
-}));
 app.use(express.json());
+
+// API routes (before static file serving)
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'healthy',
+        rooms: rooms.size,
+        users: userSockets.size,
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime()
+    });
+});
+
+app.get('/api/ping', (req, res) => {
+    res.json({ pong: true, timestamp: new Date().toISOString() });
+});
+
+// Serve static files from the React app build
+const distPath = path.join(__dirname, '../dist');
+console.log('🔍 DEBUG: Looking for dist folder at:', distPath);
+
+// Check if dist folder exists
+const fs = require('fs');
+if (fs.existsSync(distPath)) {
+    console.log('✅ Found dist folder, serving static files');
+    app.use(express.static(distPath));
+    
+    // Catch-all handler: send back React's index.html file for any non-API routes
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(distPath, 'index.html'));
+    });
+} else {
+    console.log('❌ Dist folder not found, serving backend API only');
+    // Fallback: serve a simple HTML page
+    app.get('*', (req, res) => {
+        res.send(`
+            <html>
+                <head><title>Study Room Server</title></head>
+                <body>
+                    <h1>Study Room WebSocket Server</h1>
+                    <p>Backend is running! Frontend build not found.</p>
+                    <p>Check Railway logs for build errors.</p>
+                </body>
+            </html>
+        `);
+    });
+}
 
 // In-memory storage for rooms (will be replaced with database later)
 const rooms = new Map();
@@ -60,30 +80,7 @@ function generateRoomCode() {
     return result;
 }
 
-// Basic routes
-app.get('/', (req, res) => {
-    res.json({ 
-        message: 'Study Room WebSocket Server', 
-        status: 'running',
-        timestamp: new Date().toISOString(),
-        version: '1.0.0'
-    });
-});
-
-app.get('/health', (req, res) => {
-    res.json({
-        status: 'healthy',
-        rooms: rooms.size,
-        users: userSockets.size,
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime()
-    });
-});
-
-// Simple ping endpoint for Railway health checks
-app.get('/ping', (req, res) => {
-    res.json({ pong: true, timestamp: new Date().toISOString() });
-});
+// Basic routes moved to /api/ prefix above
 
 // Socket.io connection handling
 io.on('connection', (socket) => {
