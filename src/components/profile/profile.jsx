@@ -123,7 +123,17 @@ export default function Profile() {
                                 <Bar dataKey="totalWorkDuration" fill="#3f9e34" name="Work Duration"/>
                             </BarChart>
                         </ResponsiveContainer>
-                        <Button onClick={handleLogout}> logout</Button>
+                        <div className="profile-actions">
+                            <Button 
+                                variant="contained" 
+                                color="primary" 
+                                onClick={() => navigate('/create-room')}
+                                style={{ marginRight: '10px' }}
+                            >
+                                Create Study Room
+                            </Button>
+                            <Button onClick={handleLogout}>Logout</Button>
+                        </div>
                     </div>
                 )}
             </div>

@@ -19,3 +19,11 @@
     height: 300px;
     margin-top: 1rem;
 }
+
+.profile-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
