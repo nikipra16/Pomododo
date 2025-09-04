@@ -8,13 +8,7 @@ const app = express();
 const server = http.createServer(app);
 
 // No CORS needed - same domain for frontend and backend!
-const io = socketIo(server, {
-    cors: {
-        origin: "*", // Allow all origins since we're serving from same domain
-        methods: ["GET", "POST"],
-        credentials: true
-    }
-});
+const io = socketIo(server);
 
 // Middleware
 app.use(express.json());
@@ -404,15 +398,5 @@ server.listen(PORT, '0.0.0.0', () => {
     console.log(`📡 WebSocket endpoint: ws://0.0.0.0:${PORT}`);
     console.log(`🌐 HTTP endpoint: http://0.0.0.0:${PORT}`);
     console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`🔧 CORS origins configured for:`, [
-        "http://localhost:5173", "http://localhost:5173/Pomododo", 
-        "http://localhost:5174", "http://localhost:5174/Pomododo", 
-        "http://localhost:5175", "http://localhost:5175/Pomododo", 
-        "http://localhost:5176", "http://localhost:5176/Pomododo",
-        "http://localhost:5177", "http://localhost:5177/Pomododo",
-        "http://localhost:5178", "http://localhost:5178/Pomododo",
-        "https://nikitap.github.io", "https://nikitap.github.io/Pomododo",
-        "https://nikipra16.github.io", "https://nikipra16.github.io/Pomododo",
-        "https://pomododo-production.up.railway.app"
-    ]);
+    console.log(`✅ Full-stack deployment - no CORS needed`);
 });
