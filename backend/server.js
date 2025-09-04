@@ -398,5 +398,5 @@ server.listen(PORT, '0.0.0.0', () => {
     console.log(`📡 WebSocket endpoint: ws://0.0.0.0:${PORT}`);
     console.log(`🌐 HTTP endpoint: http://0.0.0.0:${PORT}`);
     console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`✅ Full-stack deployment - no CORS needed`);
+    console.log(`✅ Full-stack deployment - no CORS needed - Express 4`);
 });
