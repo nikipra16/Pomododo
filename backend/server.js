@@ -7,17 +7,16 @@ require('dotenv').config();
 const app = express();
 const server = http.createServer(app);
 
-// No CORS needed - same domain for frontend and backend!
 const io = socketIo(server);
 
 // Middleware
 app.use(express.json());
 
-// Serve static files from the React app build
+
 const distPath = path.join(__dirname, '../dist');
 console.log('🔍 DEBUG: Looking for dist folder at:', distPath);
 
-// Check if dist folder exists
+
 const fs = require('fs');
 if (fs.existsSync(distPath)) {
     console.log('✅ Found dist folder, serving static files');
@@ -26,7 +25,7 @@ if (fs.existsSync(distPath)) {
     console.log('❌ Dist folder not found, serving backend API only');
 }
 
-// API routes (after static file serving)
+// API routes
 app.get('/api/health', (req, res) => {
     res.json({
         status: 'healthy',
@@ -41,7 +40,7 @@ app.get('/api/ping', (req, res) => {
     res.json({ pong: true, timestamp: new Date().toISOString() });
 });
 
-// Catch-all handler: send back React's index.html file for any non-API routes
+
 if (fs.existsSync(distPath)) {
     app.get('*', (req, res) => {
         res.sendFile(path.join(distPath, 'index.html'));
@@ -61,12 +60,12 @@ if (fs.existsSync(distPath)) {
     });
 }
 
-// In-memory storage for rooms (will be replaced with database later)
+// (will be replaced with database later)
 const rooms = new Map();
 const roomCodes = new Map(); // roomCode -> roomId mapping
 const userSockets = new Map(); // userId -> socket.id mapping
 
-// Generate unique room code
+
 function generateRoomCode() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result = '';
@@ -76,7 +75,7 @@ function generateRoomCode() {
     return result;
 }
 
-// Basic routes moved to /api/ prefix above
+
 
 // Socket.io connection handling
 io.on('connection', (socket) => {
@@ -92,7 +91,7 @@ io.on('connection', (socket) => {
                 return;
             }
 
-            // Check if user is already in a room
+            
             if (userSockets.has(userId)) {
                 socket.emit('error', { message: 'You are already in a room' });
                 return;
@@ -152,7 +151,7 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Handle joining a room
+    
     socket.on('join-room', (data) => {
         try {
             const { roomCode, userId, userName } = data;
@@ -162,7 +161,7 @@ io.on('connection', (socket) => {
                 return;
             }
 
-            // Check if user is already in a room
+            
             if (userSockets.has(userId)) {
                 socket.emit('error', { message: 'You are already in a room' });
                 return;
@@ -270,41 +269,41 @@ io.on('connection', (socket) => {
 
             const isHost = room.hostId === socket.userId;
 
-            // Remove user from room
+
             room.attendees.delete(socket.userId);
             userSockets.delete(socket.userId);
 
-            // Leave the Socket.io room
+
             socket.leave(socket.roomId);
 
             console.log(`${user.name} left room: ${room.code}`);
 
-            // If host leaves, end the session for everyone
+
             if (isHost) {
                 console.log(`Host left room: ${room.code} - ending session`);
 
-                // Notify all users that session ended
+
                 io.to(socket.roomId).emit('session-ended', {
                     reason: 'host-left',
                     message: 'The host has left the room. Session ended.'
                 });
 
-                // Clean up room
+
                 rooms.delete(socket.roomId);
                 roomCodes.delete(room.code);
 
-                // Remove all users from userSockets tracking
+
                 for (const [userId, _] of room.attendees) {
                     userSockets.delete(userId);
                 }
             } else {
-                // If room is empty after regular user leaves, delete it
+
                 if (room.attendees.size === 0) {
                     rooms.delete(socket.roomId);
                     roomCodes.delete(room.code);
                     console.log(`Room deleted: ${room.code}`);
                 } else {
-                    // Notify remaining users using Socket.io room broadcasting
+
                     io.to(socket.roomId).emit('user-left', {
                         userId: socket.userId,
                         userName: user.name,
@@ -313,7 +312,7 @@ io.on('connection', (socket) => {
                 }
             }
 
-            // Clear socket room info
+
             socket.roomId = null;
             socket.userId = null;
 
@@ -324,11 +323,11 @@ io.on('connection', (socket) => {
         }
     });
 
-      // Handle disconnection
+
   socket.on('disconnect', () => {
     console.log(`User disconnected: ${socket.id}`);
     
-    // Handle leaving room on disconnect
+
     if (socket.roomId && socket.userId) {
       const room = rooms.get(socket.roomId);
       if (room) {
@@ -336,7 +335,7 @@ io.on('connection', (socket) => {
         if (user) {
           const isHost = room.hostId === socket.userId;
           
-          // Remove user from room
+
           room.attendees.delete(socket.userId);
           userSockets.delete(socket.userId);
           
@@ -347,32 +346,32 @@ io.on('connection', (socket) => {
           console.log(`Remaining attendees: ${room.attendees.size}`);
           console.log(`========================`);
           
-          // If host disconnects, end the session for everyone
+          // if host disconnects, end the session for everyone
           if (isHost) {
             console.log(`Host disconnected from room: ${room.code} - ending session`);
             
-            // Notify all users that session ended
+
             io.to(socket.roomId).emit('session-ended', {
               reason: 'host-disconnected',
               message: 'The host has disconnected. Session ended.'
             });
 
-            // Clean up room
+
             rooms.delete(socket.roomId);
             roomCodes.delete(room.code);
             
-            // Remove all users from userSockets tracking
+
             for (const [userId, _] of room.attendees) {
               userSockets.delete(userId);
             }
           } else {
-            // If room is empty after regular user disconnects, delete it
+
             if (room.attendees.size === 0) {
               rooms.delete(socket.roomId);
               roomCodes.delete(room.code);
               console.log(`Room deleted on disconnect: ${room.code}`);
             } else {
-              // Notify remaining users using Socket.io room broadcasting
+
               io.to(socket.roomId).emit('user-left', {
                 userId: socket.userId,
                 userName: user.name,
