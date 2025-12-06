@@ -69,7 +69,7 @@ function ToDo() {
     return (
         <div>
             <Typography sx={{ fontSize: '20px', mb: 0, fontFamily: 'Papyrus' }}>
-                Do Do list
+                To Do List
             </Typography>
             <TextField
                 label="New Task"

@@ -25,7 +25,7 @@ export default function LogIn() {
             await signInWithEmailAndPassword(auth, email, password);
             setSuccess("Login successful! Redirecting...");
             setTimeout(() => {
-                navigate("/profile");
+            navigate("/profile");
             }, 1000);
 
         } catch (error) {

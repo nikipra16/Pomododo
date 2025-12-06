@@ -35,7 +35,7 @@ export default function SignUp() {
 
             setSuccess("Please check your email to verify your account and login!");
             setTimeout(() => {
-                navigate("/login");
+            navigate("/login");
             }, 2000);
         } catch (error) {
             setError(error.message);
