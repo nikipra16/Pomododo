@@ -24,9 +24,10 @@ function App() {
 
     return (
         <div className="mainWrapper">
+            <a href="#main-content" className="skip-link">Skip to main content</a>
             <div className={'mainContainer'} >
                 <Header />
-                <div className="contentWrapper">
+                <div id="main-content" className="contentWrapper" tabIndex="-1">
                     <PomodoroTimer />
                     <div className="ToDo-container">
                         <ToDo />

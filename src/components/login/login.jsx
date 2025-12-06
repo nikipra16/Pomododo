@@ -13,19 +13,23 @@ export default function LogIn() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError("");
+        setSuccess("");
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            alert("LogIn successful!");
-            navigate("/profile");
+            setSuccess("Login successful! Redirecting...");
+            setTimeout(() => {
+                navigate("/profile");
+            }, 1000);
 
         } catch (error) {
-            alert(error.message);
+            setError(error.message);
         } finally {
             setLoading(false);
         }
@@ -38,6 +42,40 @@ export default function LogIn() {
                 <div className={'formContainer'}>
                     <form onSubmit={handleLogin}>
                         <h2 style={{fontFamily: 'monospace', color: 'whitesmoke'}}>Log In </h2>
+                        {error && (
+                            <div 
+                                role="alert" 
+                                aria-live="assertive"
+                                style={{
+                                    padding: '10px',
+                                    marginBottom: '15px',
+                                    backgroundColor: '#f8d7da',
+                                    color: '#721c24',
+                                    border: '1px solid #f5c6cb',
+                                    borderRadius: '4px',
+                                    fontFamily: 'monospace'
+                                }}
+                            >
+                                {error}
+                            </div>
+                        )}
+                        {success && (
+                            <div 
+                                role="status" 
+                                aria-live="polite"
+                                style={{
+                                    padding: '10px',
+                                    marginBottom: '15px',
+                                    backgroundColor: '#d4edda',
+                                    color: '#155724',
+                                    border: '1px solid #c3e6cb',
+                                    borderRadius: '4px',
+                                    fontFamily: 'monospace'
+                                }}
+                            >
+                                {success}
+                            </div>
+                        )}
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label"
                                    style={{fontSize: '20px', fontFamily: 'monospace'}}></label>

@@ -13,6 +13,7 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
@@ -24,16 +25,20 @@ export default function SignUp() {
         }
 
         setLoading(true);
+        setError("");
+        setSuccess("");
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             await sendEmailVerification(user);
 
-            alert("Please check your email to verify your account and login!");
-            navigate("/login");
+            setSuccess("Please check your email to verify your account and login!");
+            setTimeout(() => {
+                navigate("/login");
+            }, 2000);
         } catch (error) {
-            alert(error.message);
+            setError(error.message);
         } finally {
             setLoading(false);
         }
@@ -46,6 +51,40 @@ export default function SignUp() {
                 <div className={'formContainer'}>
                     <h2 style={{fontFamily: 'monospace', color: 'whitesmoke'}}>Sign Up</h2>
                     <form onSubmit={handleSignup}>
+                        {error && (
+                            <div 
+                                role="alert" 
+                                aria-live="assertive"
+                                style={{
+                                    padding: '10px',
+                                    marginBottom: '15px',
+                                    backgroundColor: '#f8d7da',
+                                    color: '#721c24',
+                                    border: '1px solid #f5c6cb',
+                                    borderRadius: '4px',
+                                    fontFamily: 'monospace'
+                                }}
+                            >
+                                {error}
+                            </div>
+                        )}
+                        {success && (
+                            <div 
+                                role="status" 
+                                aria-live="polite"
+                                style={{
+                                    padding: '10px',
+                                    marginBottom: '15px',
+                                    backgroundColor: '#d4edda',
+                                    color: '#155724',
+                                    border: '1px solid #c3e6cb',
+                                    borderRadius: '4px',
+                                    fontFamily: 'monospace'
+                                }}
+                            >
+                                {success}
+                            </div>
+                        )}
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label"
                                    style={{fontSize: '20px', fontFamily: 'monospace'}}></label>

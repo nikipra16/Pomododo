@@ -8,6 +8,6 @@ import AppWrapper from '/src/App.jsx';  // Correct path to AppWrapper
 // Render the AppWrapper, which contains routing and everything
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <AppWrapper />  {/* Use AppWrapper here */}
+        <AppWrapper /> 
     </StrictMode>,
 );

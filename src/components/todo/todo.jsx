@@ -111,7 +111,11 @@ function ToDo() {
                     const labelId = `checkbox-list-label-${task.id}`;
                     return (
                         <ListItem key={task.id} secondaryAction={
-                            <IconButton edge="end" onClick={() => deleteTask(task.id)}>
+                            <IconButton 
+                                edge="end" 
+                                onClick={() => deleteTask(task.id)}
+                                aria-label={`Delete task: ${task.task}`}
+                            >
                                 <DeleteIcon />
                             </IconButton>
                         }>

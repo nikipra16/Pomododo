@@ -26,6 +26,25 @@ export function PomodoroTimer() {
     const intervalRef = useRef(null);
     const startTime = useRef(0);
     const elapsedRef = useRef(0);
+    const workOverRef = useRef(null);
+    const breakOverRef = useRef(null);
+
+    // Initialize audio instaed
+    useEffect(() => {
+        workOverRef.current = new Audio('/sounds/workOver.wav');
+        breakOverRef.current = new Audio('/sounds/breakOver.wav');
+        
+        workOverRef.current.preload = 'auto';
+        breakOverRef.current.preload = 'auto';
+        
+        workOverRef.current.addEventListener('error', (e) => {
+            console.error('Work over audio failed to load:', e);
+        });
+        
+        breakOverRef.current.addEventListener('error', (e) => {
+            console.error('Break over audio failed to load:', e);
+        });
+    }, []);
     const sessionDur = () => (isBreak ? breakMinutes : workMinutes) * 60 * 1000;
 
 
@@ -38,8 +57,6 @@ export function PomodoroTimer() {
         localStorage.setItem('isBreak', isBreak.toString());
     }, [workMinutes, breakMinutes, duration, isActive, isBreak, hasStarted]);
 
-    const workOver = new Audio('/Pomododo/sounds/workOver.wav')
-    const breakOver = new Audio('/Pomododo/sounds/breakOver.wav')
 
     useEffect(() => {
         if (isActive) {
@@ -57,7 +74,13 @@ export function PomodoroTimer() {
                     elapsedRef.current = 0;
 
                     if (!isBreak) {
-                        workOver.play();
+                        // Reset and play work over sound
+                        if (workOverRef.current) {
+                            workOverRef.current.currentTime = 0;
+                            workOverRef.current.play().catch(err => {
+                                console.error('Failed to play work over sound:', err);
+                            });
+                        }
                         const user = auth.currentUser;
                         if (user) {
                             updateAnalytics(user.uid, workMinutes * 60).catch(console.error);
@@ -67,7 +90,13 @@ export function PomodoroTimer() {
                         setIsActive(true);
                         startTime.current = Date.now();
                     } else {
-                        breakOver.play();
+                        // Reset and play break over sound
+                        if (breakOverRef.current) {
+                            breakOverRef.current.currentTime = 0;
+                            breakOverRef.current.play().catch(err => {
+                                console.error('Failed to play break over sound:', err);
+                            });
+                        }
                         setIsBreak(false);
                         setIsActive(false);
                         setHasStarted(false);
@@ -90,6 +119,19 @@ export function PomodoroTimer() {
         if (!hasStarted) {
             setDuration(isBreak ? breakMinutes * 60 : workMinutes * 60);
             elapsedRef.current = 0;
+            // Prime audio for browser autoplay policy - play/pause immediately on user interaction
+            if (workOverRef.current) {
+                workOverRef.current.play().then(() => {
+                    workOverRef.current.pause();
+                    workOverRef.current.currentTime = 0;
+                }).catch(() => {});
+            }
+            if (breakOverRef.current) {
+                breakOverRef.current.play().then(() => {
+                    breakOverRef.current.pause();
+                    breakOverRef.current.currentTime = 0;
+                }).catch(() => {});
+            }
         }
         setHasStarted(true);
         setIsActive(true);
@@ -122,7 +164,7 @@ export function PomodoroTimer() {
     return (
                     <div className="Timer-container">
                         <Typography data-testid="mode-label" sx={{ color: 'whitesmoke', fontSize: '30px', mb: 0 }}>
-                            {isBreak ? 'Break Time 🤗🥳' : 'Work Time 📚🧑‍💻'}
+                            {isBreak ? 'Break Time' : 'Work Time'}
                         </Typography>
                         <div className="Timer">
                             <Typography id="timeLeft" sx={{ color: 'whitesmoke', fontSize: '80px', mb: 1 }}>
@@ -187,10 +229,20 @@ export function PomodoroTimer() {
                         </div>
                         <ThemeProvider theme={theme}>
                             <div>
-                                <IconButton onClick={handleStart} disabled={isActive} data-testid="start-btn">
+                                <IconButton 
+                                    onClick={handleStart} 
+                                    disabled={isActive} 
+                                    data-testid="start-btn"
+                                    aria-label="Start timer"
+                                >
                                     <PlayArrowIcon sx={{ color: isActive ? theme.palette.leaf.disabled : theme.palette.leaf.main }} />
                                 </IconButton>
-                                <IconButton onClick={handlePause} disabled={!isActive} data-testid="pause-btn">
+                                <IconButton 
+                                    onClick={handlePause} 
+                                    disabled={!isActive} 
+                                    data-testid="pause-btn"
+                                    aria-label="Pause timer"
+                                >
                                     <PauseIcon sx={{ color: isActive ? theme.palette.leaf.main : theme.palette.leaf.disabled }} />
                                 </IconButton>
                                 <Button onClick={handleReset} variant="contained" color="leaf" data-testid="reset-btn">
