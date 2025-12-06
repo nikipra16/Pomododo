@@ -26,7 +26,7 @@ function Header () {
             backgroundColor: '#c24f4f'
         }}>
             <Container className="nav" >
-                <Navbar.Brand as={Link} to="/" className="custom-navbar-brand">POMODODO</Navbar.Brand>
+                <Navbar.Brand href="#home" className="custom-navbar-brand">POMODODO</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
