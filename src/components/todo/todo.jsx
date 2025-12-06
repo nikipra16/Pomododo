@@ -66,9 +66,21 @@ function ToDo() {
         });
     };
 
+    const taskList = Object.values(tasks);
+    const hasTasks = taskList.length > 0;
+
     return (
         <div>
-            <Typography sx={{ fontSize: '20px', mb: 0, fontFamily: 'Papyrus' }}>
+            <Typography 
+                sx={{ 
+                    fontSize: '24px', 
+                    mb: 2, 
+                    fontWeight: 700,
+                    color: '#2e7d32',
+                    fontFamily: 'Poppins, sans-serif',
+                    letterSpacing: '0.5px'
+                }}
+            >
                 To Do List
             </Typography>
             <TextField
@@ -76,9 +88,16 @@ function ToDo() {
                 variant="outlined"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
+                onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                        addTask(text);
+                    }
+                }}
                 fullWidth
                 sx={{
+                    mb: 2,
                     '& .MuiOutlinedInput-root': {
+                        backgroundColor: '#fff',
                         '& fieldset': {
                             borderColor: '#3f9e34',
                         },
@@ -101,47 +120,103 @@ function ToDo() {
                 variant="contained"
                 color="primary"
                 onClick={() => addTask(text)}
-                style={{ marginTop: '10px', backgroundColor: '#3f9e34' }}
+                sx={{
+                    mb: 2,
+                    backgroundColor: '#2e7d32',
+                    '&:hover': {
+                        backgroundColor: '#1b5e20',
+                    },
+                    textTransform: 'none',
+                    fontWeight: 500,
+                }}
             >
                 Add Task
             </Button>
 
-            <List>
-                {Object.values(tasks).map((task) => {
-                    const labelId = `checkbox-list-label-${task.id}`;
-                    return (
-                        <ListItem key={task.id} secondaryAction={
-                            <IconButton 
-                                edge="end" 
-                                onClick={() => deleteTask(task.id)}
-                                aria-label={`Delete task: ${task.task}`}
+            {!hasTasks ? (
+                <Typography 
+                    sx={{ 
+                        textAlign: 'center', 
+                        color: '#3f9e34', 
+                        fontStyle: 'italic',
+                        mt: 3,
+                        fontSize: '14px',
+                        fontWeight: 500
+                    }}
+                >
+                    No tasks yet. Add one above!
+                </Typography>
+            ) : (
+                <List sx={{ mt: 1 }}>
+                    {taskList.map((task) => {
+                        const labelId = `checkbox-list-label-${task.id}`;
+                        return (
+                            <ListItem 
+                                key={task.id} 
+                                secondaryAction={
+                                    <IconButton 
+                                        edge="end" 
+                                        onClick={() => deleteTask(task.id)}
+                                        aria-label={`Delete task: ${task.task}`}
+                                        sx={{
+                                            color: '#d32f2f',
+                                            '&:hover': {
+                                                backgroundColor: 'rgba(211, 47, 47, 0.1)',
+                                            },
+                                        }}
+                                    >
+                                        <DeleteIcon />
+                                    </IconButton>
+                                }
+                                sx={{
+                                    mb: 0.5,
+                                    backgroundColor: task.completed ? '#f5f5f5' : '#fff',
+                                    borderRadius: '8px',
+                                    '&:hover': {
+                                        backgroundColor: task.completed ? '#eeeeee' : '#f9f9f9',
+                                    },
+                                }}
                             >
-                                <DeleteIcon />
-                            </IconButton>
-                        }>
-                            <ListItemButton role={undefined} onClick={() => handleTask(task.id)} dense>
-                                <ListItemIcon>
-                                    <Checkbox
-                                        edge="start"
-                                        checked={task.completed}
-                                        tabIndex={-1}
-                                        disableRipple
-                                        inputProps={{ 'aria-labelledby': labelId }}
-                                    />
-                                </ListItemIcon>
-                                <ListItemText
-                                    id={labelId}
-                                    primary={task.task}
-                                    style={{
-                                        textDecoration: task.completed ? 'line-through' : 'none',
-                                        color: task.completed ? '#999' : '#000'
+                                <ListItemButton 
+                                    role={undefined} 
+                                    onClick={() => handleTask(task.id)} 
+                                    dense
+                                    sx={{
+                                        borderRadius: '8px',
                                     }}
-                                />
-                            </ListItemButton>
-                        </ListItem>
-                    );
-                })}
-            </List>
+                                >
+                                    <ListItemIcon>
+                                        <Checkbox
+                                            edge="start"
+                                            checked={task.completed}
+                                            tabIndex={-1}
+                                            disableRipple
+                                            inputProps={{ 'aria-labelledby': labelId }}
+                                            sx={{
+                                                color: '#3f9e34',
+                                                '&.Mui-checked': {
+                                                    color: '#3f9e34',
+                                                },
+                                            }}
+                                        />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        id={labelId}
+                                        primary={task.task}
+                                        sx={{
+                                            '& .MuiListItemText-primary': {
+                                                textDecoration: task.completed ? 'line-through' : 'none',
+                                                color: task.completed ? '#999' : '#333',
+                                                fontSize: '15px',
+                                            },
+                                        }}
+                                    />
+                                </ListItemButton>
+                            </ListItem>
+                        );
+                    })}
+                </List>
+            )}
         </div>
     );
 }

@@ -41,7 +41,7 @@ export default function LogIn() {
             <div className="formWrapper">
                 <div className={'formContainer'}>
                     <form onSubmit={handleLogin}>
-                        <h2 style={{fontFamily: 'monospace', color: 'whitesmoke'}}>Log In </h2>
+                        <h2 style={{fontFamily: 'Poppins, sans-serif', color: 'whitesmoke', fontWeight: 600}}>Log In </h2>
                         {error && (
                             <div 
                                 role="alert" 
@@ -53,7 +53,7 @@ export default function LogIn() {
                                     color: '#721c24',
                                     border: '1px solid #f5c6cb',
                                     borderRadius: '4px',
-                                    fontFamily: 'monospace'
+                                    fontFamily: 'Poppins, sans-serif'
                                 }}
                             >
                                 {error}
@@ -70,7 +70,7 @@ export default function LogIn() {
                                     color: '#155724',
                                     border: '1px solid #c3e6cb',
                                     borderRadius: '4px',
-                                    fontFamily: 'monospace'
+                                    fontFamily: 'Poppins, sans-serif'
                                 }}
                             >
                                 {success}

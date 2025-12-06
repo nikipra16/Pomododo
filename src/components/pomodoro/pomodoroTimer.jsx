@@ -121,11 +121,11 @@ export function PomodoroTimer() {
 
     return (
                     <div className="Timer-container">
-                        <Typography data-testid="mode-label" sx={{ color: 'whitesmoke', fontSize: '30px', mb: 0 }}>
-                            {isBreak ? 'Break Time 🤗🥳' : 'Work Time 📚🧑‍💻'}
+                        <Typography data-testid="mode-label" sx={{ color: 'whitesmoke', fontSize: '30px', mb: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 600, letterSpacing: '0.5px' }}>
+                            {isBreak ? 'Break Time' : 'Work Time'}
                         </Typography>
                         <div className="Timer">
-                            <Typography id="timeLeft" sx={{ color: 'whitesmoke', fontSize: '80px', mb: 1 }}>
+                            <Typography id="timeLeft" sx={{ color: 'whitesmoke', fontSize: '80px', mb: 1, fontFamily: 'Poppins, sans-serif', fontWeight: 700, letterSpacing: '2px' }}>
                                 {`${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, '0')}`}
                             </Typography>
                             <LinearProgress
@@ -136,14 +136,14 @@ export function PomodoroTimer() {
                                     height: 10,
                                     backgroundColor: '#f3f3f3',
                                     '& .MuiLinearProgress-bar': {
-                                        backgroundColor: isBreak ? '#4CAF50' : '#3f9e34',
+                                        backgroundColor: isBreak ? '#a5d6a7' : '#a5d6a7',
                                     },
                                 }}
                             />
                         </div>
                         <div className="slidersWrapper">
                             <div className="sliderItem">
-                                <Typography data-testid="timer-label" sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1 }}>
+                                <Typography data-testid="timer-label" sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1, fontFamily: 'Poppins, sans-serif', fontWeight: 500 }}>
                                     Work Time
                                 </Typography>
                                 <Slider
@@ -160,11 +160,11 @@ export function PomodoroTimer() {
                                     step={1}
                                     disabled={hasStarted}
                                     valueLabelDisplay="auto"
-                                    sx={{ color: '#3f9e34' }}
+                                    sx={{ color: '#a5d6a7' }}
                                 />
                             </div>
                             <div className="sliderItem">
-                                <Typography data-testid="timer-label" sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1 }}>
+                                <Typography data-testid="timer-label" sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1, fontFamily: 'Poppins, sans-serif', fontWeight: 500 }}>
                                     Break Time
                                 </Typography>
                                 <Slider
@@ -181,7 +181,7 @@ export function PomodoroTimer() {
                                     step={1}
                                     disabled={hasStarted}
                                     valueLabelDisplay="auto"
-                                    sx={{ color: '#3f9e34' }}
+                                    sx={{ color: '#a5d6a7' }}
                                 />
                             </div>
                         </div>

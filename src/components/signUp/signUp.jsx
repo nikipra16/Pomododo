@@ -49,7 +49,7 @@ export default function SignUp() {
             <Header/>
             <div className="formWrapper">
                 <div className={'formContainer'}>
-                    <h2 style={{fontFamily: 'monospace', color: 'whitesmoke'}}>Sign Up</h2>
+                    <h2 style={{fontFamily: 'Poppins, sans-serif', color: 'whitesmoke', fontWeight: 600}}>Sign Up</h2>
                     <form onSubmit={handleSignup}>
                         {error && (
                             <div 
@@ -62,7 +62,7 @@ export default function SignUp() {
                                     color: '#721c24',
                                     border: '1px solid #f5c6cb',
                                     borderRadius: '4px',
-                                    fontFamily: 'monospace'
+                                    fontFamily: 'Poppins, sans-serif'
                                 }}
                             >
                                 {error}
@@ -79,7 +79,7 @@ export default function SignUp() {
                                     color: '#155724',
                                     border: '1px solid #c3e6cb',
                                     borderRadius: '4px',
-                                    fontFamily: 'monospace'
+                                    fontFamily: 'Poppins, sans-serif'
                                 }}
                             >
                                 {success}
