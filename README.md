@@ -3,6 +3,7 @@ A simple Pomodoro webste to help students (or anyone!) focus on tasks by using i
 - **To Do list**: Users can add tasks for a session.
 - **Sign Up/ Log In**
   
+ Check it out: https://nikipra16.github.io/Pomododo/
 
 ## Under progress
 Rooms ( multi user )
