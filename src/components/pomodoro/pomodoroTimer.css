@@ -1,6 +1,6 @@
 .textField {
     margin-bottom: 29px;
-    background-color: #fff3eb ;
+    background-color: #fff3eb;
     border-radius: 4px;
 }
 
@@ -22,14 +22,12 @@
     border-radius: 190px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    width: 430px;
-    height: 400px;
-    margin: 30px;
-    /*position: absolute;*/
-    /*top: auto;*/
-    /*left: auto;*/
-    /*transform: translate(-50%, -50%);*/
-    /*border: 2px solid black;*/
+    width: 100%;
+    max-width: 430px;
+    min-height: 400px;
+    height: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 
@@ -51,10 +49,11 @@
 /* For small screens (phones) */
 @media (max-width: 600px) {
     .Timer-container {
-        width: 50%;
-        height: auto;
-        padding: 20px;
-        flex-direction: column;
+        max-width: 90%;
+        min-width: 280px;
+        padding: 25px 20px;
+        border-radius: 120px;
+        min-height: 320px;
     }
 
     .Timer h2 {
@@ -65,6 +64,13 @@
         flex-direction: column;
         gap: 15px;
         margin-top: 15px;
+        width: 100%;
+    }
+
+    .slidersWrapper > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: auto !important;
     }
 
     label {
@@ -76,16 +82,13 @@
     }
 }
 
-/* tablets */
-@media (max-width: 900px) {
+/* For tablets */
+@media (min-width: 601px) and (max-width: 900px) {
     .Timer-container {
-        width: 70%;
-        height: auto;
-        padding: 30px;
-    }
-
-    .contentWrapper {
-        margin-top:100px;
+        max-width: 80%;
+        padding: 35px;
+        border-radius: 150px;
+        min-height: 360px;
     }
 
     .Timer h2 {
@@ -97,11 +100,11 @@
     }
 }
 
-/* desktops */
+/* For large screens (desktops) */
 @media (min-width: 1200px) {
     .Timer-container {
-        width: 430px;
-        height: 400px;
+        max-width: 430px;
+        min-height: 400px;
         padding: 40px;
     }
 

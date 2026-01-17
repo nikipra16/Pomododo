@@ -118,32 +118,72 @@ export function PomodoroTimer() {
     }, []);
 
     const progress = (duration / (isBreak ? breakMinutes * 60 : workMinutes * 60)) * 100;
+    const minutesRemaining = Math.floor(duration / 60);
+    const secondsRemaining = duration % 60;
+    const progressLabel = isBreak 
+        ? `Break time progress: ${minutesRemaining} minutes ${secondsRemaining} seconds remaining`
+        : `Work time progress: ${minutesRemaining} minutes ${secondsRemaining} seconds remaining`;
 
     return (
                     <div className="Timer-container">
-                        <Typography data-testid="mode-label" sx={{ color: 'whitesmoke', fontSize: '30px', mb: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 600, letterSpacing: '0.5px' }}>
+            <Typography 
+                component="h2"
+                data-testid="mode-label" 
+                sx={{ 
+                    color: '#ffffff', 
+                    fontSize: '26px', 
+                    mb: 0, 
+                    mt: 0, 
+                    fontFamily: 'Poppins, sans-serif', 
+                    fontWeight: 700, 
+                    letterSpacing: '0.5px', 
+                    lineHeight: '1.2' 
+                }}
+            >
                             {isBreak ? 'Break Time' : 'Work Time'}
                         </Typography>
                         <div className="Timer">
-                            <Typography id="timeLeft" sx={{ color: 'whitesmoke', fontSize: '80px', mb: 1, fontFamily: 'Poppins, sans-serif', fontWeight: 700, letterSpacing: '2px' }}>
+                            <time 
+                                id="timeLeft" 
+                                style={{ 
+                                    color: '#ffffff', 
+                        fontSize: '65px',
+                        marginBottom: '6px',
+                        marginTop: '0',
+                                    fontFamily: 'Poppins, sans-serif', 
+                                    fontWeight: 700, 
+                        letterSpacing: '1px',
+                        display: 'block',
+                        lineHeight: '1.1',
+                        width: '100%',
+                        textAlign: 'center'
+                                }}
+                            >
                                 {`${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, '0')}`}
-                            </Typography>
+                            </time>
                             <LinearProgress
                                 variant="determinate"
                                 value={progress}
+                                aria-label={progressLabel}
+                                aria-valuetext={`${Math.round(progress)}% complete`}
                                 sx={{
                                     width: '100%',
                                     height: 10,
                                     backgroundColor: '#f3f3f3',
                                     '& .MuiLinearProgress-bar': {
-                                        backgroundColor: isBreak ? '#a5d6a7' : '#a5d6a7',
+                            backgroundColor: isBreak ? '#489D4B' : '#489D4B',
                                     },
                                 }}
                             />
                         </div>
                         <div className="slidersWrapper">
-                            <div className="sliderItem">
-                                <Typography data-testid="timer-label" sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1, fontFamily: 'Poppins, sans-serif', fontWeight: 500 }}>
+                <div style={{ width: 'auto', minWidth: '160px', maxWidth: '180px', boxSizing: 'border-box' }}>
+                    <Typography
+                        component="label"
+                        htmlFor="workSlider"
+                        data-testid="timer-label"
+                        sx={{ color: '#ffffff', fontSize: '18px', mb: 1, fontFamily: 'Poppins, sans-serif', fontWeight: 600, lineHeight: '1.2' }}
+                    >
                                     Work Time
                                 </Typography>
                                 <Slider
@@ -160,11 +200,19 @@ export function PomodoroTimer() {
                                     step={1}
                                     disabled={hasStarted}
                                     valueLabelDisplay="auto"
-                                    sx={{ color: '#a5d6a7' }}
+                        sx={{
+                            color: '#a5d6a7',
+                            width: '100%',
+                        }}
                                 />
                             </div>
-                            <div className="sliderItem">
-                                <Typography data-testid="timer-label" sx={{ color: 'whitesmoke', fontSize: '18px', mb: 1, fontFamily: 'Poppins, sans-serif', fontWeight: 500 }}>
+                <div style={{ width: 'auto', minWidth: '160px', maxWidth: '180px', boxSizing: 'border-box' }}>
+                    <Typography
+                        component="label"
+                        htmlFor="breakSlider"
+                        data-testid="timer-label"
+                        sx={{ color: '#ffffff', fontSize: '18px', mb: 1, fontFamily: 'Poppins, sans-serif', fontWeight: 600, lineHeight: '1.2' }}
+                    >
                                     Break Time
                                 </Typography>
                                 <Slider
@@ -181,20 +229,51 @@ export function PomodoroTimer() {
                                     step={1}
                                     disabled={hasStarted}
                                     valueLabelDisplay="auto"
-                                    sx={{ color: '#a5d6a7' }}
+                        sx={{
+                            color: '#a5d6a7',
+                            width: '100%',
+                        }}
                                 />
                             </div>
                         </div>
                         <ThemeProvider theme={theme}>
-                            <div>
-                                <IconButton onClick={handleStart} disabled={isActive} data-testid="start-btn">
+                <div style={{
+                    display: 'flex',
+                    gap: '8px',
+                    justifyContent: 'center',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    marginTop: '6px',
+                    width: '100%',
+                    maxWidth: '100%',
+                    padding: '0 8px',
+                    boxSizing: 'border-box'
+                }}>
+                                <IconButton 
+                                    onClick={handleStart} 
+                                    disabled={isActive} 
+                                    data-testid="start-btn"
+                                    aria-label="Start timer"
+                                >
                                     <PlayArrowIcon sx={{ color: isActive ? theme.palette.leaf.disabled : theme.palette.leaf.main }} />
                                 </IconButton>
-                                <IconButton onClick={handlePause} disabled={!isActive} data-testid="pause-btn">
+                                <IconButton 
+                                    onClick={handlePause} 
+                                    disabled={!isActive} 
+                                    data-testid="pause-btn"
+                                    aria-label="Pause timer"
+                                >
                                     <PauseIcon sx={{ color: isActive ? theme.palette.leaf.main : theme.palette.leaf.disabled }} />
                                 </IconButton>
-                                <Button onClick={handleReset} variant="contained" color="leaf" data-testid="reset-btn">
-                                    <div style={{ color: 'whitesmoke' }}>Reset</div>
+                    <Button
+                        onClick={handleReset}
+                        variant="contained"
+                        color="leaf"
+                        data-testid="reset-btn"
+                        aria-label="Reset timer"
+                        sx={{ color: 'white' }}
+                    >
+                        Reset
                                 </Button>
                             </div>
                         </ThemeProvider>

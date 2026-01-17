@@ -17,9 +17,19 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 // Initialize Cloud Firestore and get a reference to the service
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const analytics = getAnalytics(app);
+
+// Initialize Analytics only if in browser and not in development
+let analytics = null;
+if (typeof window !== 'undefined' && import.meta.env.PROD) {
+    try {
+        analytics = getAnalytics(app);
+    } catch (error) {
+        console.warn('Firebase Analytics initialization failed:', error);
+        // Analytics will be null, but app will still work
+    }
+}
+export { analytics };

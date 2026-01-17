@@ -5,7 +5,7 @@ export async function updateAnalytics(userId, sessionDuration) {
     if (!userId) return;
 
     const today = new Date();
-    const dateKey = today.toISOString().split('T')[0]; // "YYYY-MM-DD"
+    const dateKey = today.toISOString().split('T')[0];
 
     const dailyDocRef = doc(db, "users", userId, "analytics", dateKey);
 

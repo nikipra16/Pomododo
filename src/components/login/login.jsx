@@ -41,7 +41,7 @@ export default function LogIn() {
             <div className="formWrapper">
                 <div className={'formContainer'}>
                     <form onSubmit={handleLogin}>
-                        <h2 style={{fontFamily: 'Poppins, sans-serif', color: 'whitesmoke', fontWeight: 600}}>Log In </h2>
+                        <h2 style={{fontFamily: 'Poppins, sans-serif', color: '#ffffff', fontWeight: 700, fontSize: '2rem'}}>Log In </h2>
                         {error && (
                             <div 
                                 role="alert" 
@@ -78,7 +78,7 @@ export default function LogIn() {
                         )}
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label"
-                                   style={{fontSize: '20px', fontFamily: 'monospace'}}></label>
+                                   style={{fontSize: '20px', fontFamily: 'Poppins, sans-serif'}}>Email</label>
                             <input type="email" className="form-control" id="exampleInputEmail1"
                                    aria-describedby="emailHelp"
                                    value={email}
@@ -88,7 +88,7 @@ export default function LogIn() {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputPassword1" className="form-label"
-                                   style={{fontSize: '20px', fontFamily: 'monospace'}}></label>
+                                   style={{fontSize: '20px', fontFamily: 'Poppins, sans-serif'}}>Password</label>
                             <input type="password" className="form-control" id="exampleInputPassword1"
                                    placeholder="Password"
                                    value={password}
@@ -107,9 +107,9 @@ export default function LogIn() {
                         </Button>
                     </form>
                     <br/>
-                    <p style={{fontFamily: 'monospace', color: 'whitesmoke'}}>
+                    <p style={{fontFamily: 'monospace', color: '#ffffff', fontSize: '16px', fontWeight: 500}}>
                         Not a user?{" "}
-                        <Link to="/signup" style={{fontFamily: 'monospace'}}>Sign Up</Link>
+                        <Link to="/signup" style={{fontFamily: 'monospace', color: '#ffffff', textDecoration: 'underline'}}>Sign Up</Link>
                     </p>
                 </div>
             </div>

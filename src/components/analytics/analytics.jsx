@@ -8,8 +8,10 @@ import { logEvent } from "firebase/analytics";
 
 export const logUserEvent = (eventName, eventParams = {}) => {
     try {
+        if (analytics) {
         logEvent(analytics, eventName, eventParams);
+        }
     } catch (err) {
-        console.warn("Analytics event not logged (dev mode?):", err);
+        console.warn("Analytics event not logged:", err);
     }
 };

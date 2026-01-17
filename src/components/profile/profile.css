@@ -2,22 +2,44 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
-
+    margin-top: 20px;
     padding: 1rem;
-    /* keep your existing flex and text-align styles if needed */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     color: #c24f4f;
-    /*border: 2px solid black;*/
 }
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .profile-container {
+        margin-top: 60px;
+        padding: 1.5rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .profile-container {
+        margin-top: 100px;
+        padding: 2rem;
+    }
+}
+
 .chart-wrapper {
-    width: 90%;
+    width: 100%;
     max-width: 800px;
-    height: 300px;
+    height: 250px;
     margin-top: 1rem;
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .chart-wrapper {
+        width: 90%;
+        height: 300px;
+    }
 }
 
 .profile-actions {
@@ -26,4 +48,19 @@
     gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
+    padding: 0 1rem;
 }
+
+/* Mobile: stack buttons vertically on very small screens */
+@media (max-width: 480px) {
+    .profile-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .profile-actions button {
+        width: 100%;
+    }
+}
+

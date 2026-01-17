@@ -1,21 +1,27 @@
 #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
     text-align: center;
+    background: transparent;
 }
 
 html, body, #root {
     height: 100%;
     margin: 0;
     padding: 0;
+    width: 100%;
+    background: transparent;
 }
 html,body {
     width: 100%;
+    background-color: #ffffff;
+    min-height: 100vh;
 }
 
 .read-the-docs {
-    color: #888;
+    color:#ffc7c7;
 }
 
 /* Skip link for keyboard navigation - WCAG 2.4.1 */
@@ -43,8 +49,25 @@ label {
 
 .textField {
     margin-bottom: 29px;
-    background-color: #fff3eb ;
+    background-color: #fff3eb;
     border-radius: 4px;
+}
+
+.mainWrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+}
+
+.mainContainer {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: transparent;
 }
 
 .contentWrapper {
@@ -53,12 +76,12 @@ label {
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    padding: 80px 40px;
+    padding: 120px 40px 40px 40px;
     gap: 40px;
     width: 100%;
     min-height: calc(100vh - 80px);
-    margin-top: 80px;
     position: relative;
+    margin: 0 auto;
 }
 /*.Timer-container {*/
 /*    display: flex;*/
@@ -84,85 +107,54 @@ label {
     background-color: #a5d6a7;
     border-radius: 16px;
     padding: 24px;
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     max-height: 600px;
     overflow-y: auto;
+    box-sizing: border-box;
 }
 
-/*.timeLeft {*/
-/*    color: white;*/
-/*}*/
+/* Media Queries for Responsiveness */
 
-/*.slidersWrapper {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: center;*/
-/*    gap: 30px;*/
-/*    margin-top: 20px;*/
-/*    flex-wrap: wrap;*/
-/*}*/
+/* For small screens (phones) */
+@media (max-width: 600px) {
+    .contentWrapper {
+        padding: 20px;
+        padding-top: 100px;
+        gap: 30px;
+    }
 
-/*!* Media Queries for Responsiveness *!*/
+    .ToDo-container {
+        max-width: 100%;
+        padding: 20px;
+    }
 
-/*!* For small screens (phones) *!*/
-/*@media (max-width: 600px) {*/
-/*    .Timer-container {*/
-/*        width: 50%;*/
-/*        height: auto;*/
-/*        padding: 20px;*/
-/*        flex-direction: column;*/
-/*    }*/
+    #root {
+        padding: 0.5rem;
+    }
+}
 
-/*    .Timer h2 {*/
-/*        font-size: 50px;*/
-/*    }*/
+/* For tablets */
+@media (min-width: 601px) and (max-width: 900px) {
+    .contentWrapper {
+        padding: 30px;
+        padding-top: 110px;
+        gap: 35px;
+    }
 
-/*    .slidersWrapper {*/
-/*        flex-direction: column;*/
-/*        gap: 15px;*/
-/*        margin-top: 15px;*/
-/*    }*/
+    .ToDo-container {
+        max-width: 400px;
+    }
+}
 
-/*    label {*/
-/*        font-size: 18px;*/
-/*    }*/
+/* For large screens (desktops) */
+@media (min-width: 1200px) {
+    .contentWrapper {
+        padding: 120px 40px 40px 40px;
+    }
 
-/*    .textField {*/
-/*        margin-bottom: 20px;*/
-/*    }*/
-/*}*/
-
-/*!* tablets *!*/
-/*@media (max-width: 900px) {*/
-/*    .Timer-container {*/
-/*        width: 70%;*/
-/*        height: auto;*/
-/*        padding: 30px;*/
-/*    }*/
-
-/*    .contentWrapper {*/
-/*        margin-top:100px;*/
-/*    }*/
-
-/*    .Timer h2 {*/
-/*        font-size: 60px;*/
-/*    }*/
-
-/*    .slidersWrapper {*/
-/*        gap: 20px;*/
-/*    }*/
-/*}*/
-
-/*!* desktops *!*/
-/*@media (min-width: 1200px) {*/
-/*    .Timer-container {*/
-/*        width: 430px;*/
-/*        height: 400px;*/
-/*        padding: 40px;*/
-/*    }*/
-
-/*    .Timer h2 {*/
-/*        font-size: 70px;*/
-/*    }*/
-/*}*/
+    .ToDo-container {
+        max-width: 350px;
+    }
+}
