@@ -22,14 +22,14 @@ function Header () {
     }, []);
 
     return (
-        <Navbar expand="lg"  fixed="top" data-bs-theme="dark" style={{
+        <Navbar expand="lg" fixed="top" data-bs-theme="dark" style={{
             backgroundColor: '#c24f4f'
         }}>
-            <Container className="nav" >
+            <Container fluid className="nav-container">
                 <Navbar.Brand href="#" className="custom-navbar-brand">POMODODO</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
+                    <Nav>
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         {!user && <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>}
                         <Nav.Link as={Link} to="/profile">Profile</Nav.Link>

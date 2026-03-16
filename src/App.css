@@ -76,12 +76,12 @@ label {
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    padding: 120px 40px 40px 40px;
+    padding: 40px 40px 40px 40px; /* keep side/bottom padding normal */
     gap: 40px;
     width: 100%;
     min-height: calc(100vh - 80px);
     position: relative;
-    margin: 0 auto;
+    margin: 40px auto 0 auto;  /* <<< add big top margin here */
 }
 /*.Timer-container {*/
 /*    display: flex;*/

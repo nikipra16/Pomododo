@@ -70,11 +70,18 @@ function ToDo() {
     const hasTasks = taskList.length > 0;
 
     return (
-        <div>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'stretch',
+                gap: '12px',
+            }}
+        >
             <Typography 
                 sx={{ 
                     fontSize: { xs: '20px', sm: '22px', md: '24px' }, 
-                    mb: 2, 
+                    mb: 1,
                     fontWeight: 700,
                     color: '#2e7d32',
                     fontFamily: 'Poppins, sans-serif',
@@ -126,13 +133,15 @@ function ToDo() {
                 color="primary"
                 onClick={() => addTask(text)}
                 sx={{
-                    mb: 2,
+                    mb: 1.5,
                     backgroundColor: '#2e7d32',
                     '&:hover': {
                         backgroundColor: '#1b5e20',
                     },
                     textTransform: 'none',
                     fontWeight: 500,
+                    borderRadius: '999px',
+                    px: 3,
                 }}
             >
                 Add Task
@@ -152,7 +161,14 @@ function ToDo() {
                     No tasks yet. Add one above!
                 </Typography>
             ) : (
-                <List sx={{ mt: 1 }}>
+                <List
+                    sx={{
+                        mt: 1,
+                        maxHeight: 260,
+                        overflowY: 'auto',
+                        pr: 0.5,
+                    }}
+                >
                     {taskList.map((task) => {
                     const labelId = `checkbox-list-label-${task.id}`;
                     return (
@@ -186,9 +202,10 @@ function ToDo() {
                             </IconButton>
                                 }
                                 sx={{
-                                    mb: 0.5,
+                                    mb: 0.75,
                                     backgroundColor: task.completed ? '#f5f5f5' : '#fff',
-                                    borderRadius: '8px',
+                                    borderRadius: '12px',
+                                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.08)',
                                     '&:hover': {
                                         backgroundColor: task.completed ? '#eeeeee' : '#f9f9f9',
                                     },
