@@ -26,25 +26,51 @@ function Header () {
             backgroundColor: '#c24f4f'
         }}>
             <Container fluid className="nav-container">
-                <Navbar.Brand href="#" className="custom-navbar-brand">POMODODO</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/" className="custom-navbar-brand">POMODODO</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav>
-                        <Nav.Link as={Link} to="/">Home</Nav.Link>
-                        {!user && <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>}
-                        <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
-                        {/*<NavDropdown title="User" id="basic-nav-dropdown">*/}
-                        {/*    <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>*/}
-                        {/*    <NavDropdown.Item href="#analytics">*/}
-                        {/*        Analytics*/}
-                        {/*    </NavDropdown.Item>*/}
-                        {/*</NavDropdown>*/}
+                    <Nav className="ms-auto align-items-lg-center header-nav-actions">
+                        {!user ? (
+                            <>
+                                <Nav.Link as={Link} to="/login">Log in</Nav.Link>
+                                <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
+                            </>
+                        ) : (
+                            <>
+                                <Nav.Link as={Link} to="/profile" className="header-profile-link">
+                                    Profile
+                                </Nav.Link>
+                                <Nav.Link as={Link} to="/analytics" className="header-analytics-link">
+                                    Analytics
+                                </Nav.Link>
+                                <NavDropdown
+                                    title="Settings"
+                                    id="header-settings-nav-dropdown"
+                                    align="end"
+                                    menuVariant="light"
+                                    className="header-settings-dropdown"
+                                >
+                                    <NavDropdown.Item as={Link} to="/settings/personal">
+                                        Personal
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/settings/preferences">
+                                        Preferences
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/settings/account">
+                                        Account
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/settings/accessibility">
+                                        Accessibility
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
 
-    )
+    );
 }
 
 export default Header;
