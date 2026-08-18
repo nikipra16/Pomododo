@@ -21,6 +21,56 @@
     opacity: 0.9;
 }
 
+/* Settings dropdown — match nav links on dark bar */
+.header-settings-dropdown .nav-link.dropdown-toggle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px !important;
+    letter-spacing: 0.6px;
+    color: white !important;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 18px;
+    padding-right: 18px;
+    margin: 0 16px;
+}
+
+.header-settings-dropdown .nav-link.dropdown-toggle::after {
+    margin-left: 0.35em;
+    vertical-align: 0.15em;
+}
+
+.header-settings-dropdown .nav-link.dropdown-toggle:hover,
+.header-settings-dropdown .nav-link.dropdown-toggle:focus,
+.header-settings-dropdown .nav-link.dropdown-toggle.show {
+    color: white !important;
+    opacity: 0.9;
+}
+
+.header-settings-dropdown .nav-link.dropdown-toggle:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.header-settings-dropdown .dropdown-menu {
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    margin-top: 0.35rem;
+}
+
+.header-settings-dropdown .dropdown-item {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+
+.header-settings-dropdown .dropdown-item:active {
+    background-color: rgba(194, 79, 79, 0.12);
+    color: #c24f4f;
+}
+
 .navbar-brand {
     color: white !important;
 }
@@ -37,7 +87,8 @@
     z-index: 1030;
     padding-top: 24px;
     padding-bottom: 24px;
-    margin-bottom: 100px;
+    /* fixed="top" — margin-bottom does not push page content; spacing is on .mainContainer */
+    margin-bottom: 0;
 }
 
 /* Make header content start truly from the left on desktop */
@@ -46,6 +97,17 @@
     margin: 0;
     padding-left: 24px;
     padding-right: 24px;
+}
+
+/* Auth + profile + settings — single row on the right */
+.header-nav-actions {
+    gap: 0.25rem;
+}
+
+@media (min-width: 992px) {
+    .header-nav-actions {
+        flex-direction: row;
+    }
 }
 
 .navbar-nav .nav-link {
@@ -66,6 +128,16 @@
         font-size: 16px !important;
         padding: 8px 16px;
     }
+
+    .header-settings-dropdown .nav-link.dropdown-toggle {
+        font-size: 16px !important;
+        padding: 8px 16px;
+        margin: 0;
+    }
+
+    .header-settings-dropdown .dropdown-menu {
+        margin-left: 0.5rem;
+    }
 }
 
 @media (max-width: 600px) {
@@ -74,6 +146,11 @@
     }
 
     .navbar-nav .nav-link {
+        font-size: 14px !important;
+        padding: 6px 12px;
+    }
+
+    .header-settings-dropdown .nav-link.dropdown-toggle {
         font-size: 14px !important;
         padding: 6px 12px;
     }

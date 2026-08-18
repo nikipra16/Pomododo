@@ -61,6 +61,8 @@ label {
     background: transparent;
 }
 
+/* Fixed navbar (Header) is out of document flow — reserve space here so
+   content never sits under it. Same in dev and on GitHub Pages. */
 .mainContainer {
     width: 100%;
     min-height: 100vh;
@@ -68,6 +70,8 @@ label {
     flex-direction: column;
     position: relative;
     background: transparent;
+    padding-top: clamp(5.25rem, 12vh, 7rem);
+    box-sizing: border-box;
 }
 
 .contentWrapper {
@@ -76,12 +80,13 @@ label {
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    padding: 40px 40px 40px 40px; /* keep side/bottom padding normal */
+    padding: 24px 40px 40px 40px;
     gap: 40px;
     width: 100%;
     min-height: calc(100vh - 80px);
     position: relative;
-    margin: 40px auto 0 auto;  /* <<< add big top margin here */
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 /*.Timer-container {*/
 /*    display: flex;*/
@@ -120,8 +125,7 @@ label {
 /* For small screens (phones) */
 @media (max-width: 600px) {
     .contentWrapper {
-        padding: 20px;
-        padding-top: 100px;
+        padding: 16px 20px 24px;
         gap: 30px;
     }
 
@@ -138,8 +142,7 @@ label {
 /* For tablets */
 @media (min-width: 601px) and (max-width: 900px) {
     .contentWrapper {
-        padding: 30px;
-        padding-top: 110px;
+        padding: 20px 30px 32px;
         gap: 35px;
     }
 
@@ -151,7 +154,7 @@ label {
 /* For large screens (desktops) */
 @media (min-width: 1200px) {
     .contentWrapper {
-        padding: 120px 40px 40px 40px;
+        padding: 24px 40px 40px 40px;
     }
 
     .ToDo-container {

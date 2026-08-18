@@ -1,17 +1,11 @@
-import { useState, useEffect, useRef, Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import './App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, IconButton, ThemeProvider} from '@mui/material';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
 import Header from './components/header/Header.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Slider, Typography } from '@mui/material';
-import { LinearProgress } from '@mui/material';
 import ToDo from './components/todo/todo.jsx';
-import theme from './components/theme.jsx';
-import { AppProvider, useAppContext } from './components/AppContext.jsx';
+import { AppProvider } from './components/AppContext.jsx';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import {PomodoroTimer} from "./components/pomodoro/pomodoroTimer.jsx";
 
@@ -19,8 +13,11 @@ import {PomodoroTimer} from "./components/pomodoro/pomodoroTimer.jsx";
 const SignUp = lazy(() => import("./components/signUp/signUp.jsx"));
 const LogIn = lazy(() => import('./components/login/login.jsx'));
 const Profile = lazy(() => import('./components/profile/profile.jsx'));
-const CreateRoom = lazy(() => import('./components/studyRoom/CreateRoom.jsx'));
-const StudyRoom = lazy(() => import('./components/studyRoom/StudyRoom.jsx'));
+const AnalyticsPage = lazy(() => import('./components/analytics/AnalyticsPage.jsx'));
+const PersonalSettings = lazy(() => import('./components/settings/PersonalSettings.jsx'));
+const PreferencesSettings = lazy(() => import('./components/settings/PreferencesSettings.jsx'));
+const AccountSettings = lazy(() => import('./components/settings/AccountSettings.jsx'));
+const AccessibilitySettings = lazy(() => import('./components/settings/AccessibilitySettings.jsx'));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -64,8 +61,11 @@ export default function AppWrapper() {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<LogIn />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/create-room" element={<CreateRoom />} />
-                    <Route path="/room/:roomCode" element={<StudyRoom />} />
+                    <Route path="/analytics" element={<AnalyticsPage />} />
+                    <Route path="/settings/personal" element={<PersonalSettings />} />
+                    <Route path="/settings/preferences" element={<PreferencesSettings />} />
+                    <Route path="/settings/account" element={<AccountSettings />} />
+                    <Route path="/settings/accessibility" element={<AccessibilitySettings />} />
                 </Routes>
                 </Suspense>
             </Router>
